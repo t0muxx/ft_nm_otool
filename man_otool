@@ -1,0 +1,196 @@
+LLVM-OTOOL(1)                                                    LLVM-OTOOL(1)
+
+
+
+NNAAMMEE
+       llvm-otool - the otool-compatible command line parser for llvm-objdump
+
+SSYYNNOOPPSSIISS
+       llllvvmm--oottooooll [ _o_p_t_i_o_n _._._.  ] [ _f_i_l_e _._._.  ]
+
+DDEESSCCRRIIPPTTIIOONN
+       The  command  line  shim  _l_l_v_m_-_o_t_o_o_l  takes all the same options as the
+       original _o_t_o_o_l(1) command and executes an  equivalent  _o_b_j_d_u_m_p(1)  com-
+       mand.   Its  use  is  to  ease  the  change over of the original use of
+       _o_t_o_o_l(1) to the llvm based open source _o_b_j_d_u_m_p(1) command with the sim-
+       ilar functionality.
+
+       The original implementation of _o_t_o_o_l(1) can now be found as _o_t_o_o_l_-_c_l_a_s_-
+       _s_i_c(1) and typically will be run by using "xcrun otool-classic".
+
+       --sshhooww--oobbjjdduummpp--ccoommmmaanndd
+              Print the _o_b_j_d_u_m_p(1) command that _l_l_v_m_-_o_t_o_o_l(1) will execute.
+
+NNOOTTEESS FFOORR SSPPEECCIIFFIICC OOPPTTIIOONNSS
+       --ll     This always implies the --hh  option,  as  the  _o_b_j_d_u_m_p(1)  option
+              --pprriivvaattee--hheeaaddeerrss  prints both the mach header and load commands.
+
+       --SS     To display the contents of the  `__.SYMDEF'  archive  file,  use
+              _l_l_v_m_-_n_m(1) with the --pprriinntt--aarrmmaapp option.
+
+GGEENNEERRAALL NNOOTTEESS
+       Many  of the older options in _o_t_o_o_l_(_1_) are obsolete as they print parts
+       of the object file that are no longer in use.   When  used  with  _l_l_v_m_-
+       _o_t_o_o_l(1) a line is printed that states the option and the functionality
+       is obsolete.  If no valid equivalent options are given then usage  mes-
+       sage from _o_b_j_d_u_m_p(1) will be printed when executed.
+
+       The  archive  member  syntax of arguments of the form _l_i_b_x_._a_(_f_o_o_._o_), is
+       not supported.  Which is the same as if the --mm option is always used.
+
+       When doing disassembly the default is to not print the opcode bytes  of
+       the  instructions even for 32-bit ARM.  To get the opcode bytes printed
+       for ARM the _o_t_o_o_l(1) option --jj needs to be used.
+
+       There are some white space differences in the output  of  the  _o_t_o_o_l(1)
+       and  _o_b_j_d_u_m_p(1)  commands  in some cases.  As the _o_b_j_d_u_m_p(1) command is
+       not meant to produce the exact same output as  _o_t_o_o_l(1)  in  all  cases
+       where the functionality is very similar.
+
+SSPPEECCIIFFIICC TTRRAANNSSLLAATTIIOONNSS OOFF OOPPTTIIOONNSS
+       Below  is  the  list  of  _o_t_o_o_l(1)  options and the specific _o_b_j_d_u_m_p(1)
+       option to print the same information.  To use these options  with  _o_b_j_-
+       _d_u_m_p(1)  the --mmaacchhoo option must be used.  The default for _o_b_j_d_u_m_p(1) is
+       as if the verbose, --vv option is always used.  To  get  the  non-verbose
+       output the _o_b_j_d_u_m_p(1) --nnoonn--vveerrbboossee option is used.
+
+       --aa     The  _o_b_j_d_u_m_p(1)  --aarrcchhiivvee--hheeaaddeerrss will print the archive header,
+              if the file is an archive.  To get the offsets  to  the  archive
+              headers that would be printed with the _o_t_o_o_l(1) --aaVV options, the
+              _o_b_j_d_u_m_p(1) --aarrcchhiivvee--mmeemmbbeerr--ooffffsseettss can be added.
+
+       --SS     There is no _o_b_j_d_u_m_p(1) option to display  the  contents  of  the
+              `__.SYMDEF' file, if the file is an archive.  For that use _l_l_v_m_-
+              _n_m(1) with the --pprriinntt--aarrmmaapp option.
+
+       --ff     The _o_b_j_d_u_m_p(1) option to display the universal headers is  --uunnii--
+              vveerrssaall--hheeaaddeerrss.
+
+       --hh     The  _o_b_j_d_u_m_p(1)  option  to display the Mach header is --pprriivvaattee--
+              hheeaaddeerr.
+
+       --ll     The _o_b_j_d_u_m_p(1) option to display the load commands is  --pprriivvaattee--
+              hheeaaddeerrss which also always displays the Mach header.
+
+       --LL     The  _o_b_j_d_u_m_p(1)  option to display the names and version numbers
+              of the shared libraries that the object file uses,  as  well  as
+              the  shared  library  ID  if  the  file  is  a shared library is
+              --ddyylliibbss--uusseedd.
+
+       --DD     The _o_b_j_d_u_m_p(1) option to display just  the  install  name  of  a
+              shared library is --ddyylliibb--iidd.
+
+       --ss _s_e_g_n_a_m_e _s_e_c_t_n_a_m_e
+              The  _o_b_j_d_u_m_p(1)  option  to  display the contents of the section
+              (_s_e_g_n_a_m_e_,_s_e_c_t_n_a_m_e) is --sseeccttiioonn _[_s_e_g_n_a_m_e_,_]_s_e_c_t_n_a_m_e where the _s_e_g_-
+              _n_a_m_e  is optional and all segments will be searched for a match-
+              ing _s_e_c_t_n_a_m_e.
+
+       --tt     The  _o_b_j_d_u_m_p(1)  option  to  display   the   contents   of   the
+              (__TEXT,__text)  section  is  to  use the --sseeccttiioonn _____T_E_X_T_,_____t_e_x_t
+              option.  If disassembly is  wanted  as  with  the  --ttvv  _o_t_o_o_l(1)
+              options  then  the  _o_b_j_d_u_m_p(1) --ddiissaasssseemmbbllee is used.  By default
+              _o_b_j_d_u_m_p(1) also symbolically disassembles the  operands  as  the
+              _o_t_o_o_l(1)  --ttVV  options  will do.  If this is not wanted then the
+              _o_b_j_d_u_m_p(1) --nnoo--ssyymmbboolliicc--ooppeerraannddss option can be used.
+
+       --dd     The  _o_b_j_d_u_m_p(1)  option  to  display   the   contents   of   the
+              (__DATA,__data)  section  is  to  use the --sseeccttiioonn _____D_A_T_A_,_____d_a_t_a
+              option.
+
+       --oo     The _o_b_j_d_u_m_p(1) option to display the contents of the __OBJC seg-
+              ment used by the Objective-C run-time system is --oobbjjcc--mmeettaa--ddaattaa.
+
+       --rr     The _o_b_j_d_u_m_p(1) option to display the relocation entries  is  --rr.
+              Note  that  the  default  relocation  entry  format is different
+              between _o_b_j_d_u_m_p(1) and _o_t_o_o_l(1).  When --rr is combined  with  the
+              --mmaacchhoo option, _o_b_j_d_u_m_p(1) will display the relocation entries in
+              the classic _o_t_o_o_l(1) format.
+
+       --II     The _o_b_j_d_u_m_p(1) option to display the indirect  symbol  table  is
+              --iinnddiirreecctt--ssyymmbboollss.
+
+       --GG     The  _o_b_j_d_u_m_p(1)  option  to  display  the  data in code table is
+              --ddaattaa--iinn--ccooddee.
+
+       --CC     The _o_b_j_d_u_m_p(1) option to display the linker  optimization  hints
+              is --lliinnkk--oopptt--hhiinnttss.
+
+       --PP     The   _o_b_j_d_u_m_p(1)   option  to  print  the  info  plist  section,
+              (__TEXT,__info_plist), as strings is --iinnffoo--pplliisstt.
+
+       --pp _n_a_m_e
+              The _o_b_j_d_u_m_p(1) option to start the disassembly from symbol  _n_a_m_e
+              is --ddiiss--ssyymmnnaammee _n_a_m_e..
+
+       --vv     For _o_b_j_d_u_m_p(1) verbose output is the default and to get the non-
+              verbose the option --nnoonn--vveerrbboossee is used.
+
+       --VV     For _o_b_j_d_u_m_p(1) displaying the disassembled operands symbolically
+              is the default and to get non-symbolic operands with disassembly
+              the option --nnoo--ssyymmbboolliicc--ooppeerraannddss is used.
+
+       --XX     The _o_b_j_d_u_m_p(1) option to not print leading addresses or  headers
+              with disassembly of sections is --nnoo--lleeaaddiinngg--aaddddrr.
+
+       --mmccppuu==_a_r_g
+              The _o_b_j_d_u_m_p(1) option when doing disassembly using the llvm dis-
+              assembler to use the cpu _a_r_g_.  is the same --mmccppuu==_a_r_g option.
+
+       --aarrcchh _a_r_c_h___t_y_p_e
+              The _o_b_j_d_u_m_p(1) options to specifies the architectures to operate
+              on are the same --aarrcchh _a_r_c_h___t_y_p_e options.
+
+       --jj     The  _o_b_j_d_u_m_p(1) prints the opcode bytes of the instructions when
+              doing disassembly by default and is turned off with  the  option
+              --nnoo--sshhooww--rraaww--iinnssnn.
+
+       ----vveerrssiioonn
+              The  _o_b_j_d_u_m_p(1)  option  to  display  the  _l_l_v_m_-_o_t_o_o_l(1) version
+              information and the _o_b_j_d_u_m_p(1) version information  is  --vveerrssiioonn
+              (with one leading dash).
+
+OOBBSSOOLLEETTEE OOPPTTIIOONNSS
+       --cc     There  is  no  _o_b_j_d_u_m_p(1) option to display the argument strings
+              (argv[] and envp[]) from a core file.
+
+       --TT     There is no _o_b_j_d_u_m_p(1) option to display the table  of  contents
+              for  a dynamically linked shared library, as this table is obso-
+              lete and no longer produced by the tools.
+
+       --RR     There is no _o_b_j_d_u_m_p(1) option to display the reference table  of
+              a  dynamically  linked shared library, as this table is obsolete
+              and no longer produced by the tools.
+
+       --MM     There is no _o_b_j_d_u_m_p(1) option to display the module table  of  a
+              dynamically linked shared library, as this table is obsolete and
+              no longer produced by the tools.
+
+       --HH     There is no _o_b_j_d_u_m_p(1) option to display the two-level namespace
+              hints table, as this table is obsolete and no longer produced by
+              the tools.
+
+       --ii     There is no _o_b_j_d_u_m_p(1) option to display the shared library ini-
+              tialization  table, as this table is obsolete and no longer pro-
+              duced by the tools.
+
+       --qq     There is no _o_b_j_d_u_m_p(1) option to use the llvm disassembler  when
+              doing disassembly as this is the default.
+
+       --QQ     There  is  no _o_b_j_d_u_m_p(1) option to use the _o_t_o_o_l(1) disassembler
+              when doing disassembly as only the llvm disassembler is used.
+
+       --ffuunnccttiioonn__ooffffsseettss
+              There is no _o_b_j_d_u_m_p(1) option when doing  disassembly  to  print
+              the decimal offset from the last label printed.
+
+       --mm     There  is no _o_b_j_d_u_m_p(1) option to not assume to the _a_r_c_h_i_v_e_(_m_e_m_-
+              _b_e_r_) syntax as that is the  default.   And  the  _a_r_c_h_i_v_e_(_m_e_m_b_e_r_)
+              syntax is not supported as file arguments with _o_b_j_d_u_m_p(1).
+
+SSEEEE AALLSSOO
+       _o_t_o_o_l_-_c_l_a_s_s_i_c(1), _l_l_v_m_-_o_b_j_d_u_m_p(1)
+
+
+
+Apple Inc.                       July 31, 2018                   LLVM-OTOOL(1)

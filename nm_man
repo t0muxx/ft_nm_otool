@@ -1,0 +1,138 @@
+NM(1)                                                                    NM(1)
+
+
+
+NNAAMMEE
+       nm - display name list (symbol table)
+
+SSYYNNOOPPSSIISS
+       llllvvmm--nnmm [ --aaggnnoopprruummxxjjllPPAA ] [ -- ] [ --tt _f_o_r_m_a_t ] [[ --aarrcchh _a_r_c_h___f_l_a_g ]...]
+       [ _f_i_l_e ... ] [ --ss _s_e_g_n_a_m_e _s_e_c_t_n_a_m_e ]
+
+       nnmm--ccllaassssiicc [ --aaggnnoopprruummxxjjllffPPAA [ ss _s_e_g_n_a_m_e _s_e_c_t_n_a_m_e ]] [ -- ] [ --tt  _f_o_r_m_a_t
+       ] [[ --aarrcchh _a_r_c_h___f_l_a_g ]...] [ _f_i_l_e ... ]
+
+DDEESSCCRRIIPPTTIIOONN
+       As  of  Xcode  8.0  the default _n_m(1) tool is _l_l_v_m_-_n_m(1).  They for the
+       most part have the same options except for --ff and --ss which the  differ-
+       ences are noted below.  More help on options for _l_l_v_m_-_n_m(1) is provided
+       when running it with the ----hheellpp option.
+
+       _N_m displays the name list (symbol table of nlist  structures)  of  each
+       object  _f_i_l_e  in  the  argument list.  In some cases, as with an object
+       that has had _s_t_r_i_p(1) with its --TT option used on the object,  that  can
+       be different than the dyld information.  For that information use _d_y_l_d_-
+       _i_n_f_o(1).
+
+       If an argument is an archive, a listing for each object file in the ar-
+       chive  will be produced.  _F_i_l_e can be of the form libx.a(x.o), in which
+       case only symbols from that member of the object file are listed.  (The
+       parentheses  have  to  be  quoted  to get by the shell.)  If no _f_i_l_e is
+       given, the symbols in _a_._o_u_t are listed.
+
+       Each symbol name is  preceded  by  its  value  (blanks  if  undefined).
+       Unless the --mm option is specified, this value is followed by one of the
+       following characters, representing the symbol type:  UU  (undefined),  AA
+       (absolute),  TT  (text  section symbol), DD (data section symbol), BB (bss
+       section symbol), CC  (common  symbol),  --  (for  debugger  symbol  table
+       entries; see --aa below), SS (symbol in a section other than those above),
+       or II (indirect symbol).  If the symbol  is  local  (non-external),  the
+       symbol's  type  is  instead  represented by the corresponding lowercase
+       letter.  A lower case uu in a dynamic shared library indicates  a  unde-
+       fined  reference  to  a  private external in another module in the same
+       library.
+
+       If  the  symbol  is  a  Objective  C  method,  the   symbol   name   is
+       ++--[[_C_l_a_s_s___n_a_m_e_(_c_a_t_e_g_o_r_y___n_a_m_e_)  _m_e_t_h_o_d_:_n_a_m_e_:]],  where  `+'  is  for class
+       methods, `-' is for instance methods, and  _(_c_a_t_e_g_o_r_y___n_a_m_e_)  is  present
+       only when the method is in a category.
+
+       The output is sorted alphabetically by default.
+
+       Options are:
+
+       --aa     Display  all  symbol table entries, including those inserted for
+              use by debuggers.
+
+       --gg     Display only global (external) symbols.
+
+       --nn     Sort numerically rather than alphabetically.
+
+       --oo     Prepend file or archive element name to each output line, rather
+              than only once.
+
+       --pp     Don't sort; display in symbol-table order.
+
+       --rr     Sort in reverse order.
+
+       --uu     Display only undefined symbols.
+
+       --UU     Don't display undefined symbols.
+
+       --mm     Display  the  N_SECT  type  symbols  (Mach-O  symbols)  as (_s_e_g_-
+              _m_e_n_t___n_a_m_e_, _s_e_c_t_i_o_n___n_a_m_e) followed by  either  _e_x_t_e_r_n_a_l  or  _n_o_n_-
+              _e_x_t_e_r_n_a_l  and then the symbol name.  Undefined, common, absolute
+              and indirect symbols get  displayed  as  _(_u_n_d_e_f_i_n_e_d_),  _(_c_o_m_m_o_n_),
+              _(_a_b_s_o_l_u_t_e_), and _(_i_n_d_i_r_e_c_t_), respectively.
+
+       --xx     Display  the  symbol  table entry's fields in hexadecimal, along
+              with the name as a string.
+
+       --jj     Just display the symbol names (no value or type).
+
+       --ss _s_e_g_n_a_m_e _s_e_c_t_n_a_m_e
+              List only those symbols in the section _(_s_e_g_n_a_m_e_,_s_e_c_t_n_a_m_e_)_.   For
+              _l_l_v_m_-_n_m(1)  this  option  must  be last on the command line, and
+              after the files.
+
+       --ll     List a pseudo symbol _._s_e_c_t_i_o_n___s_t_a_r_t if  no  symbol  has  as  its
+              value  the  starting address of the section.  (This is used with
+              the --ss option above.)
+
+       --aarrcchh _a_r_c_h___t_y_p_e
+              Specifies the architecture, _a_r_c_h___t_y_p_e_, of the file for _n_m(1)  to
+              operate  on  when  the file is a universal file (see _a_r_c_h(3) for
+              the currently known _a_r_c_h___t_y_p_es).  The _a_r_c_h___t_y_p_e can be "all"  to
+              operate  on  all  architectures  in the file.  The default is to
+              display the symbols from only the host architecture, if the file
+              contains  it;  otherwise,  symbols  for all architectures in the
+              file are displayed.
+
+       --ff  ffoorrmmaatt
+              For _l_l_v_m_-_n_m(1) this specifies the output format.   Where  format
+              can be bsd, sysv, posix or darwin.
+
+       --ff     For  _n_m_-_c_l_a_s_s_i_c(1)  this  displays the symbol table of a dynamic
+              library flat (as one file not separate modules).  This is  obso-
+              lete and not supported with _l_l_v_m_-_n_m_(_1_)_.
+
+       --AA     Write the pathname or library name of an object on each line.
+
+       --PP     Write information in a portable output format.
+
+       --tt _f_o_r_m_a_t
+              For the --PP output, write the numeric value in the specified for-
+              mat. The format shall be dependent on the single character  used
+              as the format option-argument:
+
+       _d      The value shall be written in decimal (default).
+
+       _o      The value shall be written in octal.
+
+       _x      The value shall be written in hexadecimal.
+
+       --LL     Display  the  symbols in the bitcode files in the (__LLVM,__bun-
+              dle) section if present instead of the  object's  symbol  table.
+              This  is the default if the object has no symbol table and there
+              is an (__LLVM,__bundle) section.
+
+SSEEEE AALLSSOO
+       ar(1), ar(5), Mach-O(5), stab(5), nlist(3), dyldinfo(1)
+
+BBUUGGSS
+       Displaying Mach-O symbols with --mm is too verbose.  Without the --mm, sym-
+       bols in the Objective C sections get displayed as an `s'.
+
+
+
+Apple, Inc.                      May 23, 2017                            NM(1)
