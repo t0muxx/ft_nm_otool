@@ -1,3 +1,142 @@
 https://lowlevelbits.org/parsing-mach-o-files/
 https://gitlab.com/Yalaouf/mes-binaires-nm
+http://math-atlas.sourceforge.net/devel/assembly/MachORuntime.pdf
 
+## nm : 
+	-> Can have multitple file in arg.
+	-> Can parse exec, .a .o
+	-> With no arg it search for a.out
+	-> Each symbol is preceded by its value :
+		U (undefined), A (absolute), T (text section symbol), D (data section symbol), B (bss  section  symbol),  C  (common
+		symbol),  -  (for  debugger symbol table entries; see -a below), S (symbol in a section other than those above), or I (indirect symbol).  If the symbol is local (non-external), the symbol's type is instead represented by the corresponding lowercase letter.  A lower case u in a dynamic  shared  library  indicates a undefined reference to a private external in another module in the same library.
+
+MachO structure :
+
+0x0 : Header structure
+	-> Identifie the file
+	-> Basic file type info
+	-> Target arch
+	-> Flags specifying options to interpret the file.
+
+0x0 + header_size : Load commands (serie of variable size load commands spcify layout and linkage):
+	-> Initial layout in memory
+	-> Location of the symbol table (dinamic linking) /!\
+	-> Initial execution state of main thread
+	-> Names of shared libraries
+
+0x0 + header_size+load_command : Data of the segments :
+	-> Heach segment can contain zero or more sections
+	-> Each section of segment contains code or data.
+	-> Each segment define a region of vmemory
+	-> The exact number and lyaout of segment and section is specified by load commands
+
+In last Link edit segment :
+	-> Contains table of link edit info
+		-> symbols table
+		-> string table
+
+LC_SYMTAB and LC_DYSYMTAB describe the size and location of symbol tables.
+
+nlist/nlist_64 : Descript an entry in the symbol table.
+
+	-> struct mach_header {   
+			unsigned long magic; // MH_MAGIC if little endian, HM_CIGAM if big endian
+			cpu_type_t cputype; // CPU_TYPE_POWERPC || CPU_TYPE_I386
+			cpu_subtype_t cpusubtype; // 
+			unsigned long filetype; // MH_OBJECT = .o
+									// MH_EXECUTE = stantar binary
+									// MH_BUNDLE = .bundle 
+									// MH_DYLIB = .dylib
+									// MH_PRELOAD = 
+									// MH_CORE = file to stroe core dump file
+									// MH_DYLINKER = dynamic liker shared library
+			unsigned long ncmds; // Number of load commands following. 
+			unsigned long sizeofcmds; // number of bytes occuped by load commands 
+			unsigned long flags; // 
+		};
+	-> basically the same for x64
+
+	-> struct load_command{
+			unsigned long cmd; // LC_SEGMENT || LC_SYMTAB etc...
+			unsigned long cmdsize; // total size of load command. SHOULD ALWAYS BE a MULTIPLE OF 4
+		};
+	
+Symbol Table and Related Data Structures :
+		// Define the attributes of the LC_SYMTAB load command
+		// Describe the size and location of the symboltable data struct.
+		// declared in mach-o/loader.h
+	-> struct symtab_command { 
+		uint_32 cmd; // set to LC_SYMBTAB 
+		uint_32 cmdsize; // set to sizeof(symbtab_command)
+		uint_32 symoff; // byte offset from the start of file to the location of the symbol table entries. Symbabl array of nlist.
+		uint_32 nsyms; // number of entries in the symbol table.
+		uint_32 stroff; // byte offset from the start of the image to the location of the string table.
+		uint_32 strsize; // And int indicating the size of the string table.
+		};
+
+	-> struct nlist { 
+		union { // Hold the index into the str table, n_strx. Empty string is 0.
+			#ifndef __LP64__ 
+			char *n_name; 
+			#endif 
+			int32_t n_strx; 
+			} n_un;
+			uint8_t n_type; // Byte value consistring of data accessed using four bit masks
+							// N_STAB (0xe0) : if any of this 3 bits are set -> symbolic debuggin table.
+							// N_PEXT (0x10) : if on : limited global scope.
+							// N_TYPE (0x0e) : Type of the symbol
+								// N_TYPE POSSIBLE VALUES :
+								// N_UNDF (0x0) : undefined symbol, n_sect : NO_SECT
+								// N_ABS (0x2) :  absolute symbol : n_sect = NO_SECt
+								// N_SECT (0xe) : symbol defined in n_sect.
+								// N_PBUD (0xc) : undefined and image is using prebound value for symbol. n_sect = NO_SECT
+								// N_INDR (0xa) : defined to be the same as another tymbol :
+										//  n_value is an index into the string table specifying the name of the other symbol.
+							// N_EXT (0x01) : If on symbol is external symbol.
+			uint8_t n_sect; // number of the section that this symbol can be found starting from 1 
+			int16_t n_desc; // Additional info about the symbol for non-stab symbol.
+			uint32_t n_value; // contain the value of the symbol, different for each type of symbol table entry.
+								/// for N_SECT symbol type its the addr of the symbol
+			};
+
+		// It describes the sizes and locations of the parts of the symbol table used for dynamic linking.
+	-> struct dysymtab_command { 
+			uint32_t cmd;  //set to LC_DYSYMTAB 
+			uint32_t cmdsize; // sizeof(dysymtab_command)
+			uint32_t ilocalsym; // index of first symbol in group of local symbol
+			uint32_t nlocalsym; // total number of symsbols in local symbol 
+			uint32_t iextdefsym; // index of first symbo in group of defined external symbol
+			uint32_t nextdefsym; // total number group in of defined external symbol
+			uint32_t iundefsym; // index of first symbol in group of undefinex symbol
+			uint32_t nundefsym; // total number of symbol in group of undef symbol 
+			uint32_t tocoff; // byte offset from the start to the table of contents data 
+			uint32_t ntoc; // An integer indicating the number of entries in the table of contents.
+			uint32_t modtaboff; // An integer indicating the byte offset from the start of the file to the module table data.
+			uint32_t nmodtab; // An integer indicating the number of entries in the module table.
+			uint32_t extrefsymoff; // An integer indicating the byte offset from the start of the file to the external reference table data.
+			uint32_t nextrefsyms;  // Number of entries in the external reference table 
+			uint32_t indirectsymoff; // byte offset from the start to the indirect symbol table data 
+			uint32_t nindirectsyms; // number of entries in the indirect symbol table 
+			uint32_t extreloff; // byte offset from the start to the externel relocation table data 
+			uint32_t nextrel; // number of entries in the external relocation table 
+			uint32_t locreloff; // byte offset to the local relocation table 
+			uint32_tnlocrel; // number of entries in the local relocation table
+			};
+	
+	// Describe an entry in the table of contents of the dynamic shared library.
+	-> struct dylib_table_of_contents { 
+		uint32_t symbol_index; // Index into the symbol table indicating the defined external symbol to it refers
+		uint32_t module_index; // index into the module table.
+	};
+
+### Functionnement :
+#Need to know addr of symbol, type and string_name
+	1 -> Mapping the file into memory.
+	2 -> Identifying file type (Exec/.a/.o/fat file)
+	3 -> Identifying Architecture (LittleEndian/BigEndian powerpc/x86/x64)
+	4 -> Listing and printing symbol :
+		- Exploring load command and found LC_SYMTAB && LC_DYSYMTAB.
+		- Fill  our array of symbol (nlist)  using : symtab_command->symoff && symtab_command->nsyms
+		- Fill our string table using : symtab_command->stroff symtab_command->strsize 
+		-> work on symbol list.
+		
