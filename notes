@@ -132,6 +132,10 @@ Symbol Table and Related Data Structures :
 ### Functionnement :
 #Need to know addr of symbol, type and string_name
 	1 -> Mapping the file into memory.
+		- Reads args, if == 1 : a.out
+		- open file
+		- stat (check size/perm)
+		- finaly map it and fille t_infile struct.
 	2 -> Identifying file type (Exec/.a/.o/fat file)
 	3 -> Identifying Architecture (LittleEndian/BigEndian powerpc/x86/x64)
 	4 -> Listing and printing symbol :
