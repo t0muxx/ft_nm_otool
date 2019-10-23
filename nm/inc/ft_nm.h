@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/23 15:13:27 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:52:58 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef	struct	s_infile
 	void	*mem;
 	size_t	sz;
 	void	*mac_header;
-	void	*load_command;
 	void	*segment_command;
 	void	*symtab_command;
 
