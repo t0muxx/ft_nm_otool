@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/23 12:04:57 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/23 12:29:11 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@
 #	include <mach-o/nlist.h>
 # endif
 
+# define IS_32 1
+# define IS_64 2
+# define IS_BE 3
+# define IS_BE_64 4
+
 typedef	struct	s_infile
 {
+	int		flag;
 	void	*mem;
 	size_t	sz;
 	void	*mac_header;

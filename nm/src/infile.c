@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/22 16:44:32 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/23 12:23:29 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 	if (((*infile)->mem = mmap(NULL, buf.st_size, PROT_READ,
 					MAP_PRIVATE, fd, 0)) == MAP_FAILED)
 		return (-1);
+	(*infile)->sz = 0;
+	(*infile)->flag = 0;
+	(*infile)->mac_header = NULL;
+	(*infile)->load_command = NULL;
+	(*infile)->segment_command = NULL;
+	(*infile)->symtab_command = NULL;
 	return (0);
 }
 
