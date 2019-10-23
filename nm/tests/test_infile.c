@@ -6,11 +6,10 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 14:09:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/22 17:01:12 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:22:17 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_nm.h"
 #include "tests.h"
 
 
