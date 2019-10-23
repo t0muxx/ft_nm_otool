@@ -58,6 +58,8 @@ flags = [
 
 '-I', '.',
 
+'-I', '../mach_headers/',
+
 '-I', './src/',
 
 '-I', './inc/',
