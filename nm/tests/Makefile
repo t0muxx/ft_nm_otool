@@ -41,7 +41,7 @@ SRCS = 	main.c \
 		../src/error.c \
 	  	./test_segment.c \
 		../src/segment.c \
-		../src/lst.c
+		../src/lst_section.c
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRCS))

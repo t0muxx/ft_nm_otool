@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 15:27:39 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:54:55 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len)
 	if (!(new = (t_symbol *)malloc(sizeof(t_symbol))))
 		return (NULL);
 	new->symbol = ptr;
-	if (!(new->symbol_name = (char *)malloc(sizeof(str_len+1))))
+	printf("malloc de %lu\n", str_len+1);
+	if (!(new->symbol_name = (char *)malloc(str_len+1)))
 	{
 		free(new);
 		return (NULL);
