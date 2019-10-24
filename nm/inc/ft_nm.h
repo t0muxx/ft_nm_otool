@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 11:44:07 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 11:56:07 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef	struct	s_infile
 t_infile	*process_infile(char *path);
 int			process_header(t_infile *infile);
 int			error_gen(char *str);
+int			iter_load_command(t_infile *infile);
 
 void		parse_segment(t_infile *file, struct load_command *lc);
 

@@ -1,44 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 11:55:55 by tmaraval         ###   ########.fr       */
+/*   Created: 2019/10/24 11:11:21 by tmaraval          #+#    #+#             */
+/*   Updated: 2019/10/24 11:17:13 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-int	process_args(char *file)
+t_section	*lst_section_new(void *ptr, int id)
 {
-	t_infile *infile;
+	t_section *new;
 
-	infile = NULL;
-	if (!(infile = process_infile(file)))
-		return (-1);
-	if (process_header(infile) < 0)
-		return (-1);
-	iter_load_command(infile);
-	return (0);
+	if (!(new = (t_section *)sizeof(t_section)))
+		return (NULL);
+	new->section = ptr;
+	new->id = id;
+	new->next = NULL;
+	return (new);
 }
 
-int	main(int argc, char **argv)
+void		lst_section_append(t_section **head, t_section *new)
 {
-	int i;
+	t_section *last;
 
-	i = 1;
-	if (argc == 1)
-		process_args("./a.out");
-	else
+	last = *head;
+	new->next = NULL;
+	if (*head == NULL)
 	{
-		while (i < argc)
-		{
-			process_args(argv[i]);
-			i++;
-		}
+		*head = new;
+		return ;
 	}
-	return (0);
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
+	return ;
 }
+
