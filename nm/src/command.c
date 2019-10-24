@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 11:45:28 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:47:22 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int	parse_load_command(t_infile *infile, struct load_command *lc)
 {
-	uint32_t cmd_type;
-
-	cmd_type = 0;
 	if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
 		return (-1);
 	// Need to reverse bits :
-	cmd_type = lc->cmd;
-	if (cmd_type == LC_SEGMENT)
+	if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
 		parse_segment(infile, lc);
 	/*
 	else if (cmd_type == LC_SYMTAB)
@@ -50,7 +46,7 @@ int	iter_load_command(t_infile *infile)
 	lc = (struct load_command *)infile->current;
 	while (n_lcmds)
 	{
-		if (parse_load_command(infile, lc) < 0)
+		if (parse_load_command(infile, (struct load_command *)lc) < 0)
 			return (error_gen("corrupted load commands"));
 		if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
 			return (error_gen("corrupted load commands"));

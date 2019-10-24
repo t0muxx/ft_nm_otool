@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 11:56:07 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:58:00 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define IS_BE_64 4
 
 # define DEBUG_HEADER
+# define DEBUG_SEGMENT
 
 typedef	struct	s_section
 {
@@ -64,5 +65,6 @@ void		parse_segment(t_infile *file, struct load_command *lc);
 */
 void		lst_section_append(t_section **head, t_section *new);
 t_section	*lst_section_new(void *ptr, int id);
+void		lst_section_free(t_section *head);
 
 #endif

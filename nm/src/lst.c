@@ -6,17 +6,31 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:11:21 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 11:17:13 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:46:15 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
+void		lst_section_free(t_section *head)
+{
+	t_section *tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+		tmp = NULL;
+	}
+	head = NULL;
+}
+
 t_section	*lst_section_new(void *ptr, int id)
 {
 	t_section *new;
 
-	if (!(new = (t_section *)sizeof(t_section)))
+	if (!(new = (t_section *)malloc(sizeof(t_section))))
 		return (NULL);
 	new->section = ptr;
 	new->id = id;

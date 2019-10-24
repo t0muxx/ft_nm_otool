@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 10:47:42 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 12:02:37 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 	(*infile)->type = 0;
 	(*infile)->mac_header = NULL;
 	(*infile)->sections = NULL;
-	(*infile)->nsects = 0;
 	(*infile)->symtab_command = NULL;
 	return (0);
 }
