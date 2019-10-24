@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/10/24 11:44:36 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/10/24 15:16:29 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,10 @@ SRCS = 	main.c \
 		command.c \
 		error.c \
 		header.c \
-		segment.c
+		segment.c \
+		lst_section.c \
+		lst_symbol.c \
+		symbol.c
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
