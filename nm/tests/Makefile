@@ -1,3 +1,4 @@
+#
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,7 +7,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/10/23 15:27:51 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/10/24 12:04:17 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +20,7 @@ NAME =			unit_tests.bin
 
 #FLAG AND COMPILATOR#
 CC =		clang
-CFLAGS =  -g 
+CFLAGS =  -g3 -fsanitize=address 
 
 #PATH#
 OBJ_PATH =  obj
@@ -32,10 +33,15 @@ ifeq ($(HOSTTYPE),x86_64_Darwin)
 endif
 
 SRCS = 	main.c \
+		../src/command.c \
 		../src/infile.c \
 		./test_infile.c \
 		../src/header.c \
-		./test_header.c
+		./test_header.c \
+		../src/error.c \
+	  	./test_segment.c \
+		../src/segment.c \
+		../src/lst.c
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRCS))

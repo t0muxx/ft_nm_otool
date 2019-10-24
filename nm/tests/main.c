@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:21:20 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/23 15:43:39 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:42:04 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int main(void)
 		cmocka_unit_test(test_process_header_ok_32_big_endian),
 		cmocka_unit_test(test_process_header_ok_64_big_endian),
 		cmocka_unit_test(test_process_header_ko),
+		cmocka_unit_test(test_section_parsing_ok),
+		cmocka_unit_test(test_section_parsing_32_ok),
 
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
