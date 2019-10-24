@@ -6,38 +6,31 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/23 15:50:00 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 09:49:22 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-int	error_gen(char *str)
-{
-	ft_putstr_fd("ft_nm : ", 2);
-	ft_putendl_fd(str, 2);
-	return (-1);
-}
-
 int	process_header_full(t_infile *infile)
 {
 	if (infile->type == IS_32 || infile->type == IS_BE )
 	{
-		if ((void *)infile->mem + sizeof(struct mach_header)
-				> (void *)infile->mem + infile->sz)
+		if ((void *)infile->start + sizeof(struct mach_header)
+				> (void *)infile->start + infile->sz)
 			return (error_gen("file size inferior to header size"));
 	}
 	if (infile->type == IS_64 || infile->type == IS_BE_64)
 	{
-		if ((void *)infile->mem + sizeof(struct mach_header_64)
-				> (void *)infile->mem + infile->sz)
+		if ((void *)infile->start + sizeof(struct mach_header_64)
+				> (void *)infile->start + infile->sz)
 			return (error_gen("file size inferior to header size"));
 	}
-	infile->mac_header = infile->mem;
+	infile->mac_header = infile->start;
 	if (infile->type == IS_32 || infile->type == IS_BE)
-		infile->mem = (void *)infile->mem + sizeof(struct mach_header);
+		infile->current = (void *)infile->start + sizeof(struct mach_header);
 	if (infile->type == IS_64 || infile->type == IS_BE_64)
-		infile->mem = (void *)infile->mem + sizeof(struct mach_header_64);
+		infile->current = (void *)infile->start + sizeof(struct mach_header_64);
 	return (0);
 }
 
@@ -46,10 +39,10 @@ int	process_header(t_infile *infile)
 	unsigned long magic_bytes;
 
 	magic_bytes = 0;
-	if ((void *)infile->mem + sizeof(unsigned long)
-			> (void *)infile->mem + infile->sz)
+	if ((void *)infile->start + sizeof(unsigned long)
+			> (void *)infile->start + infile->sz)
 		return (error_gen("corrupted header file"));
-	magic_bytes = *(uint32_t *)infile->mem;
+	magic_bytes = *(uint32_t *)infile->start;
 	printf("magic bytes : %#lx\n", magic_bytes);
 	if (magic_bytes == MH_MAGIC)
 		infile->type = IS_32;

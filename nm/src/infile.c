@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/23 15:53:05 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/24 10:47:42 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ void		*process_infile_error(int fd, t_infile *infile,
 
 int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 {
-	if (((*infile)->mem = mmap(NULL, buf.st_size, PROT_READ,
+	if (((*infile)->start = mmap(NULL, buf.st_size, PROT_READ,
 					MAP_PRIVATE, fd, 0)) == MAP_FAILED)
 		return (-1);
+	(*infile)->current = (*infile)->start;
 	(*infile)->sz = 0;
 	(*infile)->type = 0;
 	(*infile)->mac_header = NULL;
-	(*infile)->segment_command = NULL;
+	(*infile)->sections = NULL;
+	(*infile)->nsects = 0;
 	(*infile)->symtab_command = NULL;
 	return (0);
 }
@@ -52,8 +54,8 @@ t_infile	*process_infile(char *path)
 	if (!(infile = (t_infile *)malloc(sizeof(t_infile))))
 		return (process_infile_error(fd, NULL, path, "can't malloc"));
 	if (process_infile_mmap(&infile, buf, fd) < 0)
-		return (process_infile_error(fd, NULL, path, "can't mmap"));
-	close(fd);
+		return (process_infile_error(fd, infile, path, "can't mmap"));
 	infile->sz = buf.st_size;
+	close(fd);
 	return (infile);
 }
