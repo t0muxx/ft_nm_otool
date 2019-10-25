@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:40:39 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 14:48:39 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parse_load_command(t_infile *infile, struct load_command *lc)
 	// Need to reverse bits :
 	if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
 	{
-		if (parse_segment(infile, lc)< 0)
+		if (parse_segment(infile, lc) < 0)
 			return (-1);
 	}
 	else if (lc->cmd == LC_SYMTAB)

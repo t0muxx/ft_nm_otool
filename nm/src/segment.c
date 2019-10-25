@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:39:52 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 14:48:32 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int		parse_segment_64(t_infile *file, struct load_command *lc)
 	sg = (struct segment_command_64 *)lc;
 	nsects = reverse_32(file->type == IS_BE_64, sg->nsects);
 	sections = (void *)sg + sizeof(struct segment_command_64);
-	if (lc->cmdsize < nsects * sizeof(struct section_64))
-		return (-1);
+//	if (sg->cmdsize != sizeof(struct segment_command_64) + nsects * sizeof(struct section_64))
+//		return (-1);
 	while (nsects--)
 	{
 		lst_section_append(&file->sections, lst_section_new(sections, id));
@@ -48,8 +48,8 @@ int		parse_segment_32(t_infile *file, struct load_command *lc)
 	sg = (struct segment_command *)lc;
 	nsects = reverse_32(file->type == IS_BE, sg->nsects);
 	sections = (void *)sg + sizeof(struct segment_command);
-	if (lc->cmdsize < nsects * sizeof(struct section))
-		return (-1);
+//	if (sg->cmdsize != sizeof(struct segment_command) + nsects * sizeof(struct section))
+//		return (-1);
 	while (nsects--)
 	{
 		lst_section_append(&file->sections, lst_section_new(sections, id));
@@ -59,7 +59,7 @@ int		parse_segment_32(t_infile *file, struct load_command *lc)
 		sections = (void *)sections + sizeof(struct section);
 		id++;
 	}
-	return (-1);
+	return (0);
 }
 
 int		parse_segment(t_infile *file, struct load_command *lc)
