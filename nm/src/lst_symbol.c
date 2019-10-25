@@ -6,17 +6,54 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 16:54:55 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 10:54:20 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void		lst_symbol_print(t_symbol *head)
+void		lst_symbol_print_64(t_symbol *head)
 {
 	while (head)
 	{
-		printf("symbol : %s\n", head->symbol_name);
+		if (head->symb_value > 0)
+		{
+			ft_printf("%016lx %c %s\n", 
+					head->symb_value,
+					head->symb_char,
+					head->symbol_name);
+		}
+		else
+		{
+			ft_printf("%s %c %s\n", 
+					"                ",
+					head->symb_char,
+					head->symbol_name);
+
+		}
+		head = head->next;
+	}
+}
+
+void		lst_symbol_print_32(t_symbol *head)
+{
+	while (head)
+	{
+		if (head->symb_value > 0)
+		{
+			ft_printf("%08lx %c %s\n", 
+					head->symb_value,
+					head->symb_char,
+					head->symbol_name);
+		}
+		else
+		{
+			ft_printf("%s %c %s\n", 
+					"        ",
+					head->symb_char,
+					head->symbol_name);
+
+		}
 		head = head->next;
 	}
 }
@@ -36,14 +73,13 @@ void		lst_symbol_free(t_symbol *head)
 	head = NULL;
 }
 
-t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len)
+t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len, uint64_t val)
 {
 	t_symbol *new;
 
 	if (!(new = (t_symbol *)malloc(sizeof(t_symbol))))
 		return (NULL);
 	new->symbol = ptr;
-	printf("malloc de %lu\n", str_len+1);
 	if (!(new->symbol_name = (char *)malloc(str_len+1)))
 	{
 		free(new);
@@ -51,24 +87,35 @@ t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len)
 	}
 	ft_strncpy(new->symbol_name, str, str_len);
 	new->symbol_name[str_len] = '\0';
+	new->symb_char = 0;
+	new->symb_value = val;
 	new->next = NULL;
 	return (new);
 }
 
-void		lst_symbol_append(t_symbol **head, t_symbol *new)
+void		lst_symbol_append(t_symbol **last, t_symbol *new)
 {
-	t_symbol *last;
+	t_symbol *current;
 
-	last = *head;
-	new->next = NULL;
-	if (*head == NULL)
+	if (*last == NULL ||
+			ft_strcmp((*last)->symbol_name, new->symbol_name) >= 0)
 	{
-		*head = new;
-		return ;
+		new->next = *last;
+		*last = new;
 	}
-	while (last->next != NULL)
-		last = last->next;
-	last->next = new;
+	else
+	{
+		current = *last;
+		while (current->next != NULL &&
+		ft_strcmp(current->next->symbol_name, new->symbol_name) < 0)
+			current = current->next;
+		while (current->next != NULL && 
+				!ft_strcmp(current->next->symbol_name, new->symbol_name)
+				&& new->symb_value > current->next->symb_value)
+				current = current->next;
+		new->next = current->next;
+		current->next = new;
+	}
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 15:27:53 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 10:47:51 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define IS_BE 3
 # define IS_BE_64 4
 
-# define DEBUG_HEADER
-# define DEBUG_SEGMENT
+//# define DEBUG_HEADER
+//# define DEBUG_SEGMENT
 
 typedef	struct	s_section
 {
@@ -45,6 +45,8 @@ typedef struct	s_symbol
 {
 	void				*symbol;
 	char				*symbol_name;
+	char				symb_char;
+	uint64_t			symb_value;
 	struct s_symbol		*next;
 
 }				t_symbol;
@@ -67,7 +69,8 @@ int			error_gen(char *str);
 int			iter_load_command(t_infile *infile);
 
 void		parse_segment(t_infile *file, struct load_command *lc);
-void	parse_symtab(t_infile *file, struct symtab_command *symtab_command);
+void		parse_symtab(t_infile *file, struct symtab_command *symtab_command);
+void		symbol_resolve(t_infile *infile);
 /*
 ** t_section list :
 */
@@ -79,7 +82,9 @@ void		lst_section_free(t_section *head);
 ** t_symbol list :
 */
 void		lst_symbol_append(t_symbol **head, t_symbol *new);
-t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len);
+t_symbol	*lst_symbol_new(void *ptr, char *str,
+								size_t str_len, uint64_t val);
 void		lst_symbol_free(t_symbol *head);
-void		lst_symbol_print(t_symbol *head);
+void		lst_symbol_print_32(t_symbol *head);
+void		lst_symbol_print_64(t_symbol *head);
 #endif
