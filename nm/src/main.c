@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 10:50:06 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 11:03:23 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int	process_args(char *file)
 	if (!(infile = process_infile(file)))
 		return (-1);
 	if (process_header(infile) < 0)
+	{
+		munmap(infile->start, infile->sz);
+		free(infile);
 		return (-1);
+	}
 	iter_load_command(infile);
 	symbol_resolve(infile);
 	if (infile->type == IS_32 || infile->type == IS_BE)
