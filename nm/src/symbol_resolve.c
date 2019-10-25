@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 08:46:56 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 11:46:13 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 16:22:01 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ char	symbol_resolve_sect(t_infile *file, uint8_t n_sect)
 	sections = file->sections;
 	while (sections != NULL && ++i < n_sect)
 		sections = sections->next;
-	if (file->type == IS_32 || file->type == IS_BE)
+	if ((file->type == IS_32 || file->type == IS_BE) && sections != NULL)
 		sect_name = ((struct section *)sections->section)->sectname;
-	if (file->type == IS_64 || file->type == IS_BE_64)
+	if ((file->type == IS_64 || file->type == IS_BE_64) && sections != NULL)
 		sect_name = ((struct section_64 *)sections->section)->sectname;
+	if (!sect_name)
+		return ('?');
 	if (!ft_strcmp(sect_name, SECT_TEXT))
 		return ('T');
 	if (!ft_strcmp(sect_name, SECT_DATA))
