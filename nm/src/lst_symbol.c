@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 13:19:10 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 14:18:07 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,24 @@ t_symbol	*lst_symbol_new(void *ptr, char *str, size_t str_len, uint64_t val)
 	return (new);
 }
 
+void		lst_symbol_append_nosort(t_symbol **head, t_symbol *new)
+{
+	t_symbol *last;
+
+	last = *head;
+	new->next = NULL;
+	if (*head == NULL)
+	{
+		*head = new;
+		return ;
+	}
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
+	return ;
+
+}
+
 void		lst_symbol_append(t_symbol **last, t_symbol *new)
 {
 	t_symbol *current;
@@ -107,7 +125,7 @@ void		lst_symbol_append(t_symbol **last, t_symbol *new)
 	{
 		current = *last;
 		while (current->next != NULL &&
-		ft_strcmp(current->next->symbol_name, new->symbol_name) < 0)
+		ft_strcmp(current->next->symbol_name, new->symbol_name) <= 0)
 			current = current->next;
 		while (current->next != NULL && 
 				!ft_strcmp(current->next->symbol_name, new->symbol_name)
