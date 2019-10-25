@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 11:46:54 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 13:29:52 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	parse_load_command(t_infile *infile, struct load_command *lc)
 	if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
 		parse_segment(infile, lc);
 	else if (lc->cmd == LC_SYMTAB)
-		parse_symtab(infile, (struct symtab_command *)lc);
+	{
+		if (parse_symtab(infile, (struct symtab_command *)lc) < 0)
+			return (-1);
+	}
 	else 
 		;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 10:54:20 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 13:19:10 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		lst_symbol_print_64(t_symbol *head)
 {
 	while (head)
 	{
-		if (head->symb_value > 0)
+		if (head->symb_char != 'U')
 		{
 			ft_printf("%016lx %c %s\n", 
 					head->symb_value,
@@ -39,7 +39,7 @@ void		lst_symbol_print_32(t_symbol *head)
 {
 	while (head)
 	{
-		if (head->symb_value > 0)
+		if (head->symb_char != 'U')
 		{
 			ft_printf("%08lx %c %s\n", 
 					head->symb_value,
