@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 08:41:10 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 11:46:54 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ uint32_t get_load_command_num(t_infile *infile)
 		n_lcmds = ((struct mach_header *)infile->mac_header)->ncmds;
 	if (infile->type == IS_64)
 		n_lcmds = ((struct mach_header_64 *)infile->mac_header)->ncmds;
-	// Need to reverse bits :
 	if (infile->type == IS_BE)
-		n_lcmds = ((struct mach_header *)infile->mac_header)->ncmds;
+		n_lcmds = reverse_32(1,
+				((struct mach_header *)infile->mac_header)->ncmds);
 	if (infile->type == IS_BE_64)
-		n_lcmds = ((struct mach_header *)infile->mac_header)->ncmds;
+	{
+		n_lcmds = reverse_32(1,
+				((struct mach_header *)infile->mac_header)->ncmds);
+	}
 	return (n_lcmds);
 }
 
@@ -57,7 +60,9 @@ int	iter_load_command(t_infile *infile)
 			return (error_gen("corrupted load commands"));
 		if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
 			return (error_gen("corrupted load commands"));
-		lc = (void *)lc + ((struct load_command *)lc)->cmdsize;  
+		lc = (void *)lc + reverse_32(
+				infile->type == IS_BE || infile->type == IS_BE_64,
+				((struct load_command *)lc)->cmdsize);
 		n_lcmds--;
 	}
 	return (0);
