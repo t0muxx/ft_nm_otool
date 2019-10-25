@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:14:22 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 14:40:04 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			process_header(t_infile *infile);
 int			error_gen(char *str);
 int			iter_load_command(t_infile *infile);
 
-void		parse_segment(t_infile *file, struct load_command *lc);
+int			parse_segment(t_infile *file, struct load_command *lc);
 int			parse_symtab(t_infile *file, struct symtab_command *symtab_command);
 void		symbol_resolve(t_infile *infile);
 /*

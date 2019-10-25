@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 13:29:52 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/25 14:40:39 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	parse_load_command(t_infile *infile, struct load_command *lc)
 		return (-1);
 	// Need to reverse bits :
 	if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
-		parse_segment(infile, lc);
+	{
+		if (parse_segment(infile, lc)< 0)
+			return (-1);
+	}
 	else if (lc->cmd == LC_SYMTAB)
 	{
 		if (parse_symtab(infile, (struct symtab_command *)lc) < 0)
@@ -53,19 +56,21 @@ int	iter_load_command(t_infile *infile)
 {
 	uint32_t		 	n_lcmds;
 	void				*lc;
+	uint32_t			cmdsize;
 
 	lc = NULL;
 	n_lcmds = get_load_command_num(infile);
 	lc = (struct load_command *)infile->current;
 	while (n_lcmds)
 	{
+		cmdsize = reverse_32(
+			infile->type == IS_BE || infile->type == IS_BE_64,
+			 ((struct load_command *)lc)->cmdsize);
 		if (parse_load_command(infile, (struct load_command *)lc) < 0)
 			return (error_gen("corrupted load commands"));
 		if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
 			return (error_gen("corrupted load commands"));
-		lc = (void *)lc + reverse_32(
-				infile->type == IS_BE || infile->type == IS_BE_64,
-				((struct load_command *)lc)->cmdsize);
+		lc = (void *)lc + cmdsize;
 		n_lcmds--;
 	}
 	return (0);
