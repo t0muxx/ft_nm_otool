@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 15:32:11 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 12:21:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 int	parse_load_command(t_infile *infile, struct load_command *lc)
 {
+	uint32_t cmd_type;
+
+	cmd_type = reverse_32(infile->type == IS_BE || infile->type == IS_BE_64,
+			lc->cmd);
 	if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
 		return (-1);
 	// Need to reverse bits :
-	if (lc->cmd == LC_SEGMENT || lc->cmd == LC_SEGMENT_64)
+	if (cmd_type == LC_SEGMENT || cmd_type == LC_SEGMENT_64)
 	{
 		if (parse_segment(infile, lc) < 0)
 			return (-1);
 	}
-	else if (lc->cmd == LC_SYMTAB)
+	else if (cmd_type == LC_SYMTAB)
 	{
 		if (parse_symtab(infile, (struct symtab_command *)lc) < 0)
 			return (-1);
@@ -42,12 +46,14 @@ uint32_t get_load_command_num(t_infile *infile)
 	if (infile->type == IS_64)
 		n_lcmds = ((struct mach_header_64 *)infile->mac_header)->ncmds;
 	if (infile->type == IS_BE)
-		n_lcmds = reverse_32(1,
-				((struct mach_header *)infile->mac_header)->ncmds);
-	if (infile->type == IS_BE_64)
 	{
 		n_lcmds = reverse_32(1,
 				((struct mach_header *)infile->mac_header)->ncmds);
+	}
+	if (infile->type == IS_BE_64)
+	{
+		n_lcmds = reverse_32(1,
+				((struct mach_header_64 *)infile->mac_header)->ncmds);
 	}
 	return (n_lcmds);
 }

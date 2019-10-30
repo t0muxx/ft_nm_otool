@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 08:46:56 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 16:22:01 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 13:55:08 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	symbol_get_letter(t_infile *file, uint8_t n_type, uint8_t n_sect, uint64_t 
 	char  c;
 	uint8_t type;
 
-	n_type = reverse_8(file->type == IS_BE || file->type == IS_BE_64, n_type);
-	n_sect = reverse_8(file->type == IS_BE || file->type == IS_BE_64, n_sect);
 	type = n_type & N_TYPE;
 	c = '?';
 	if (n_type & N_STAB)

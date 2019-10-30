@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:23:51 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 12:21:39 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	process_args(char *file)
 
 	infile = NULL;
 	if (!(infile = process_infile(file)))
+	{
 		return (-1);
+	}
 	if (process_header(infile) < 0)
 	{
 		munmap(infile->start, infile->sz);

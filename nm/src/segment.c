@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:50:06 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 12:20:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		parse_segment_64(t_infile *file, struct load_command *lc)
 	sg = (struct segment_command_64 *)lc;
 	nsects = reverse_32(file->type == IS_BE_64, sg->nsects);
 	sections = (void *)sg + sizeof(struct segment_command_64);
-	if (sg->cmdsize != sizeof(struct segment_command_64) + nsects * sizeof(struct section_64))
+	if (reverse_32(file->type == IS_BE_64, sg->cmdsize) != sizeof(struct segment_command_64) + nsects * sizeof(struct section_64))
 		return (-1);
 	while (nsects--)
 	{
@@ -48,10 +48,13 @@ int		parse_segment_32(t_infile *file, struct load_command *lc)
 	sg = (struct segment_command *)lc;
 	nsects = reverse_32(file->type == IS_BE, sg->nsects);
 	sections = (void *)sg + sizeof(struct segment_command);
-	if (sg->cmdsize != sizeof(struct segment_command) + nsects * sizeof(struct section))
+	if (reverse_32(file->type == IS_BE, sg->cmdsize) != sizeof(struct segment_command) + nsects * sizeof(struct section))
 		return (-1);
 	while (nsects--)
 	{
+#ifdef DEBUG_SECTION
+		printf("added section : %s for segment : %s\n", ((struct section *)sections)->sectname, ((struct section *)sections)->segname);
+#endif
 		lst_section_append(&file->sections, lst_section_new(sections, id));
 		if ((void *)sections + sizeof(struct section) 
 				> (void *)file->start + file->sz)

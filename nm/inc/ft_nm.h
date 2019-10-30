@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 15:52:59 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 13:57:32 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 //# define DEBUG_HEADER
 //# define DEBUG_SEGMENT
+//# define DEBUG_SECTION
 
 typedef	struct	s_section
 {
