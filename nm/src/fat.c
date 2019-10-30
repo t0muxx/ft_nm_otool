@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 16:11:52 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 16:50:02 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	process_fat_64(t_infile *file)
 			return (error_gen("corrupted fat arch"));
 		i++;
 		fat_arch = fat_arch + i;
-		ft_putendl("");
 	}
 	return (0);
 }
@@ -86,7 +85,6 @@ int	process_fat_32(t_infile *file)
 			return (error_gen("corrupted fat arch"));
 		i++;
 		fat_arch = fat_arch + i;
-		ft_putendl("");
 	}
 	return (0);
 }
