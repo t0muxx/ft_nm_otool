@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 12:21:16 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 14:16:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	iter_load_command(t_infile *infile)
 	totalsize = 0;
 	while (n_lcmds)
 	{
+		if ((void *)lc + sizeof(((struct load_command *)lc)->cmdsize) >
+				(void *)infile->start + infile->sz)
+			return (error_gen("corrupted load commands"));
 		cmdsize = reverse_32(
 			infile->type == IS_BE || infile->type == IS_BE_64,
 			 ((struct load_command *)lc)->cmdsize);

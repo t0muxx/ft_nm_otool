@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/25 14:18:07 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 14:26:25 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		lst_symbol_append(t_symbol **last, t_symbol *new)
 	t_symbol *current;
 
 	if (*last == NULL ||
-			ft_strcmp((*last)->symbol_name, new->symbol_name) >= 0)
+			ft_strcmp((*last)->symbol_name, new->symbol_name) > 0)
 	{
 		new->next = *last;
 		*last = new;
@@ -130,7 +130,7 @@ void		lst_symbol_append(t_symbol **last, t_symbol *new)
 		while (current->next != NULL && 
 				!ft_strcmp(current->next->symbol_name, new->symbol_name)
 				&& new->symb_value > current->next->symb_value)
-				current = current->next;
+			current = current->next;
 		new->next = current->next;
 		current->next = new;
 	}
