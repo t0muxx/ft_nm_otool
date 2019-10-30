@@ -6,19 +6,28 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 16:50:02 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 17:10:21 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void	fat_print_arch(t_infile *file, cpu_type_t cputype)
+void	fat_print_arch(t_infile *file, cpu_type_t cputype, cpu_subtype_t cpusubtype)
 {
 	cputype = reverse_32(1, cputype);
-	if (cputype == CPU_TYPE_X86)
+	cpusubtype = reverse_32(1, cpusubtype);
+	if (cputype == CPU_TYPE_I386)
 		ft_printf("\n%s (for architecture i386):\n", file->filename);
+	else if (cputype == CPU_TYPE_POWERPC)
+		ft_printf("\n%s (for architecture ppc):\n", file->filename);
 	else if (cputype == CPU_TYPE_X86_64)
-		ft_printf("\n%s (for architecture x86_64):\n", file->filename);
+	{
+		if (cpusubtype == CPU_SUBTYPE_X86_64_H)
+			ft_printf("\n%s (for architecture x86_64h):\n", file->filename);
+		else
+			ft_printf("\n%s (for architecture x86_64):\n", file->filename);
+
+	}
 }
 
 int	process_fat_64(t_infile *file)
@@ -43,7 +52,7 @@ int	process_fat_64(t_infile *file)
 		+ reverse_64(1,fat_arch->size) > (void *)save_start + file->sz )
 			return (error_gen("corrupted fat arch"));
 		file->start += reverse_64(1, fat_arch->offset);
-		fat_print_arch(file, fat_arch->cputype);
+		fat_print_arch(file, fat_arch->cputype, fat_arch->cpusubtype);
 		process_header(file);
 		file->start = save_start;
 		if ((void *)fat_arch + sizeof(fat_arch)
@@ -77,7 +86,7 @@ int	process_fat_32(t_infile *file)
 		+ reverse_32(1,fat_arch->size) > (void *)save_start + file->sz )
 			return (error_gen("corrupted fat arch"));
 		file->start = (void *)file->start + reverse_32(1, fat_arch->offset);
-		fat_print_arch(file, fat_arch->cputype);
+		fat_print_arch(file, fat_arch->cputype, fat_arch->cpusubtype);
 		process_macho(file);
 		file->start = save_start;
 		if ((void *)fat_arch + sizeof(fat_arch)
