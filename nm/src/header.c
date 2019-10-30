@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 12:22:00 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 15:13:21 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,4 @@ int	process_header(t_infile *infile)
 #endif
 	return (process_header_full(infile));
 }
+

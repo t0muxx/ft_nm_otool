@@ -6,27 +6,16 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 12:21:39 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 15:52:47 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-int	process_args(char *file)
+int	process_macho(t_infile *infile)
 {
-	t_infile *infile;
-
-	infile = NULL;
-	if (!(infile = process_infile(file)))
-	{
-		return (-1);
-	}
 	if (process_header(infile) < 0)
-	{
-		munmap(infile->start, infile->sz);
-		free(infile);
-		return (-1);
-	}
+		return error_gen("corrupted fat header");
 	if (iter_load_command(infile) < 0)
 	{
 		munmap(infile->start, infile->sz);
@@ -41,7 +30,27 @@ int	process_args(char *file)
 	else if (infile->type == IS_64 || infile->type == IS_BE_64)
 		lst_symbol_print_64(infile->symbols);
 	lst_symbol_free(infile->symbols);
+	infile->symbols = NULL;
 	lst_section_free(infile->sections);
+	infile->sections = NULL;
+	return (0);
+}
+
+int	process_args(char *file)
+{
+	t_infile *infile;
+
+	infile = NULL;
+	if (!(infile = process_infile(file)))
+	{
+		return (-1);
+	}
+	if (process_fat(infile) < 0)
+	{
+		munmap(infile->start, infile->sz);
+		free(infile);
+		return (-1);
+	}
 	munmap(infile->start, infile->sz);
 	free(infile);
 	return (0);

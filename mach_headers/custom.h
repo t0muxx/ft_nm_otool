@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 11:57:00 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 13:33:47 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 16:05:42 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,72 @@ struct mach_header_64 {
 	uint32_t	reserved;	/* reserved */
 };
 
+struct fat_header {
+    uint32_t        magic;      /* FAT_MAGIC or FAT_MAGIC_64 */
+    uint32_t        nfat_arch;  /* number of structs that follow */
+};
+
+struct fat_arch {                /* struct fat_arch_64 for 64-bit*/
+    cpu_type_t      cputype;    /* cpu specifier (int) */
+    cpu_subtype_t   cpusubtype; /* machine specifier (int) */
+	uint32_t        offset;     /* file offset to this object file */
+	uint32_t        size;       /* size of this object file */
+    uint32_t        align;      /* alignment as a power of 2 */
+};
+
+struct fat_arch_64 {                /* struct fat_arch_64 for 64-bit*/
+    cpu_type_t      cputype;    /* cpu specifier (int) */
+    cpu_subtype_t   cpusubtype; /* machine specifier (int) */
+	uint64_t        offset;     /* file offset to this object file */
+	uint64_t        size;       /* size of this object file */
+    uint32_t        align;      /* alignment as a power of 2 */
+    uint32_t        reserved;      /* alignment as a power of 2 */
+};
+
+/*
+ * Capability bits used in the definition of cpu_type.
+ */
+#define	CPU_ARCH_MASK	0xff000000		/* mask for architecture bits */
+#define CPU_ARCH_ABI64	0x01000000		/* 64 bit ABI */
+
+/*
+ *	Machine types known by all.
+ */
+
+#define CPU_TYPE_ANY		((cpu_type_t) -1)
+
+#define CPU_TYPE_VAX		((cpu_type_t) 1)
+/* skip				((cpu_type_t) 2)	*/
+/* skip				((cpu_type_t) 3)	*/
+/* skip				((cpu_type_t) 4)	*/
+/* skip				((cpu_type_t) 5)	*/
+#define	CPU_TYPE_MC680x0	((cpu_type_t) 6)
+#define CPU_TYPE_X86		((cpu_type_t) 7)
+#define CPU_TYPE_I386		CPU_TYPE_X86		/* compatibility */
+#define	CPU_TYPE_X86_64		(CPU_TYPE_X86 | CPU_ARCH_ABI64)
+
+/* skip CPU_TYPE_MIPS		((cpu_type_t) 8)	*/
+/* skip 			((cpu_type_t) 9)	*/
+#define CPU_TYPE_MC98000	((cpu_type_t) 10)
+#define CPU_TYPE_HPPA           ((cpu_type_t) 11)
+#define CPU_TYPE_ARM		((cpu_type_t) 12)
+#define CPU_TYPE_MC88000	((cpu_type_t) 13)
+#define CPU_TYPE_SPARC		((cpu_type_t) 14)
+#define CPU_TYPE_I860		((cpu_type_t) 15)
+/* skip	CPU_TYPE_ALPHA		((cpu_type_t) 16)	*/
+/* skip				((cpu_type_t) 17)	*/
+#define CPU_TYPE_POWERPC		((cpu_type_t) 18)
+#define CPU_TYPE_POWERPC64		(CPU_TYPE_POWERPC | CPU_ARCH_ABI64)
+
+
 #define MH_MAGIC    0xfeedface
 #define MH_CIGAM    0xcefaedfe
 #define MH_MAGIC_64 0xfeedfacf
 #define MH_CIGAM_64 0xcffaedfe
+#define FAT_MAGIC    0xcafebabe    /* the fat magic number */
+#define FAT_CIGAM    0xbebafeca    /* NXSwapLong(FAT_MAGIC) */
+#define FAT_MAGIC_64 0xcafebabf    /* the 64-bit fat magic number */
+#define FAT_CIGAM_64 0xbfbafeca    /* NXSwapLong(FAT_MAGIC_64) */
 
 #define	MH_OBJECT	0x1		/* relocatable object file */
 #define	MH_EXECUTE	0x2		/* demand paged executable file */

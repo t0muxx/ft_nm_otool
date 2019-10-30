@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 13:57:32 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/30 16:02:25 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_symbol
 
 typedef	struct	s_infile
 {
+	char		*filename;
 	uint8_t		type;
 	void		*start;
 	void		*current;
@@ -65,6 +66,8 @@ typedef	struct	s_infile
 
 }				t_infile;
 
+int			process_fat(t_infile *file);
+int			process_macho(t_infile *infile);
 t_infile	*process_infile(char *path);
 int			process_header(t_infile *infile);
 int			error_gen(char *str);

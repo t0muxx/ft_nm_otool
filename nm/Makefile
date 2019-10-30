@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/10/30 14:16:55 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/10/30 15:29:52 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRCS = 	main.c \
 		lst_symbol.c \
 		symbol.c \
 		symbol_resolve.c \
-		reverse_bytes.c
+		reverse_bytes.c \
+		fat.c
 
 OBJ = $(SRC:$(SRC_PATH)/%.c=$(OBJ_PATH)/%.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
