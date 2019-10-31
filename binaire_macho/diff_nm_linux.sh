@@ -4,7 +4,7 @@ for file in $@ $1
 do
 	echo "diff on $file"
 	echo $file >> errftnm
-	nm $file > resnm 2>> errnm
+	cat $file.out > resnm 2>> errnm
 	../nm/ft_nm $file > resftnm 2>> errftnm
 	diff resnm resftnm
 done
