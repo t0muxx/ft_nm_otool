@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 09:13:30 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 10:45:26 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	process_fat_64(t_infile *file)
 		+ reverse_64(1, fat_arch->offset) 
 		+ reverse_64(1,fat_arch->size) > (void *)save_start + file->sz )
 			return (error_gen("corrupted fat arch"));
-		file->start += reverse_64(1, fat_arch->offset);
+		file->start = (void *)file->start + reverse_64(1, fat_arch->offset);
 		fat_print_arch(file, fat_arch->cputype, fat_arch->cpusubtype);
 		process_header(file);
 		file->start = save_start;
@@ -133,6 +133,7 @@ int	process_fat(t_infile *file)
 			> (void *)file->start + file->sz)
 		return (error_gen("corrupted fat header"));
 	magic_bytes = *(uint32_t *)file->start;
+//	printf("magic_bytes == %lx\n", magic_bytes);
 	if (magic_bytes != FAT_MAGIC && magic_bytes != FAT_MAGIC_64 && magic_bytes != FAT_CIGAM && magic_bytes != FAT_CIGAM_64)
 		return (process_macho(file));
 	if ((void *)file->start + sizeof(struct fat_header) + sizeof(cpu_type_t)
