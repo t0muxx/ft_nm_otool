@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 10:45:26 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:02:46 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,18 @@ void	fat_print_arch(t_infile *file, cpu_type_t cputype, cpu_subtype_t cpusubtype
 	if (cputype == CPU_TYPE_I386)
 		ft_printf("\n%s (for architecture i386):\n", file->filename);
 	else if (cputype == CPU_TYPE_POWERPC)
-		ft_printf("\n%s (for architecture ppc):\n", file->filename);
+		ft_printf("\n%s (for architecture ):\n", file->filename);
 	else if (cputype == CPU_TYPE_X86_64)
 		ft_printf("\n%s (for architecture x86_64):\n", file->filename);
+	else if (cputype == CPU_TYPE_ARM64)
+		ft_printf("\n%s (for architecture arm64):\n", file->filename);
+	else if (cputype == CPU_TYPE_ARM)
+	{
+		if (cpusubtype == CPU_SUBTYPE_ARM_V7)
+			ft_printf("\n%s (for architecture armv7):\n", file->filename);
+		else if (cpusubtype == CPU_SUBTYPE_ARM_V7S)
+			ft_printf("\n%s (for architecture armv7s):\n", file->filename);
+	}
 }
 
 int	process_fat_64(t_infile *file)
@@ -42,20 +51,19 @@ int	process_fat_64(t_infile *file)
 	fat_head = file->start;
 	while (i < reverse_32(1, fat_head->nfat_arch))
 	{
-		if ((void *)save_start + reverse_64(1, fat_arch->offset)
+		if ((void *)save_start + reverse_64(1, fat_arch[i].offset)
 		> (void *)save_start + file->sz || (void *)save_start 
-		+ reverse_64(1, fat_arch->offset) 
-		+ reverse_64(1,fat_arch->size) > (void *)save_start + file->sz )
+		+ reverse_64(1, fat_arch[i].offset) 
+		+ reverse_64(1,fat_arch[i].size) > (void *)save_start + file->sz )
 			return (error_gen("corrupted fat arch"));
-		file->start = (void *)file->start + reverse_64(1, fat_arch->offset);
-		fat_print_arch(file, fat_arch->cputype, fat_arch->cpusubtype);
-		process_header(file);
+		file->start = (void *)file->start + reverse_64(1, fat_arch[i].offset);
+		fat_print_arch(file, fat_arch[i].cputype, fat_arch[i].cpusubtype);
+		process_macho(file);
 		file->start = save_start;
-		if ((void *)fat_arch + sizeof(fat_arch)
-		> (void *)file->start + file->sz)
+		if ((void *)fat_arch + sizeof(struct fat_arch_64)
+		> (void *)file->save + file->sz)
 			return (error_gen("corrupted fat arch"));
 		i++;
-		fat_arch = fat_arch + i;
 	}
 	return (0);
 }
@@ -76,20 +84,20 @@ int	process_fat_32(t_infile *file)
 	fat_head = file->start;
 	while (i < reverse_32(1, fat_head->nfat_arch))
 	{
-		if ((void *)save_start + reverse_32(1, fat_arch->offset)
+		if ((void *)save_start + reverse_32(1, fat_arch[i].offset)
 		> (void *)save_start + file->sz || (void *)save_start 
-		+ reverse_32(1, fat_arch->offset) 
-		+ reverse_32(1,fat_arch->size) > (void *)save_start + file->sz )
+		+ reverse_32(1, fat_arch[i].offset) 
+		+ reverse_32(1,fat_arch[i].size) > (void *)save_start + file->sz )
 			return (error_gen("corrupted fat arch"));
-		file->start = (void *)file->start + reverse_32(1, fat_arch->offset);
-		fat_print_arch(file, fat_arch->cputype, fat_arch->cpusubtype);
+//		printf("offset == %u\n", reverse_32(1, fat_arch[i].offset));
+		file->start = (void *)file->start + reverse_32(1, fat_arch[i].offset);
+		fat_print_arch(file, fat_arch[i].cputype, fat_arch[i].cpusubtype);
 		process_macho(file);
 		file->start = save_start;
-		if ((void *)fat_arch + sizeof(fat_arch)
-		> (void *)file->start + file->sz)
+		if ((void *)fat_arch + sizeof(struct fat_arch_64)
+		> (void *)file->save + file->sz)
 			return (error_gen("corrupted fat arch"));
 		i++;
-		fat_arch = fat_arch + i;
 	}
 	return (0);
 }

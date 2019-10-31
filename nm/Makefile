@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/10/31 09:10:05 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/10/31 12:03:49 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME =			ft_nm
 
 #FLAG AND COMPILATOR#
 CC =		clang
-CFLAGS =  -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS =  -Wall -Werror -Wextra -g3 
 
 #PATH#
 OBJ_PATH =  obj

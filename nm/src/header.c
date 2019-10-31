@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 11:02:02 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:03:05 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	process_header(t_infile *infile)
 			> (void *)infile->save + infile->sz)
 		return (error_gen("corrupted header file"));
 	magic_bytes = *(uint32_t *)infile->start;
+//	printf("--> %lx\n", magic_bytes);
 	if (magic_bytes == MH_MAGIC)
 		infile->type = IS_32;
 	else if (magic_bytes  == MH_MAGIC_64)
