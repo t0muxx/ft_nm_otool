@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/10/31 12:13:32 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/10/31 14:10:15 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -I$(INC_PATH) -I$(INC_LIBFT) $(INC_MACHO) ../libft/libft.a $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) -I$(INC_PATH) -I$(INC_LIBFT) $(INC_MACHO) $(OBJ) ../libft/libft.a -o $(NAME)
 	/bin/rm -f $(LINK)
 
 $(OBJ): $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
