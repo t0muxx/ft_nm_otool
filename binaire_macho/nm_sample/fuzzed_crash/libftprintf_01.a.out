@@ -1,0 +1,57 @@
+
+nm_sample/fuzzed_crash/libftprintf_01.a(formatfct.o):
+                 U _apply_flag
+                 U _bconv
+0000000000000230 T _c_fmt
+                 U _ft_strdup
+                 U _ft_strlen
+0000000000000360 T _get_arg_signed
+00000000000007e0 T _get_arg_unsigned
+                 U _malloc
+                 U _paddl
+0000000000000160 T _percent
+0000000000000000 T _str_fmt
+
+nm_sample/fuzzed_crash/libftprintf_01.a(formatfct2.o):
+                 U _add0x
+                 U _apply_flag
+                 U _bconv
+                 U _free
+                 U _ft_strdup
+                 U _ft_strlen
+                 U _ft_strncpy
+                 U _get_arg_signed
+                 U _get_arg_unsigned
+0000000000000000 T _i_fmt
+0000000000000120 T _p_fmt
+                 U _paddl
+0000000000000270 T _x_fmt
+0000000000000462 s l_.str
+
+nm_sample/fuzzed_crash/libftprintf_01.a(ft_printf.o):
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000270 T _add_formated_str
+                 U _c_fmt
+0000000000000000 T _compute
+                 U _count_digit
+                 U _free
+                 U _ft_atoi
+00000000000004d0 T _ft_printf
+                 U _ft_putlen
+                 U _ft_realloc
+                 U _ft_strdel
+                 U _ft_strncpy
+                 U _ft_strnew
+00000000000006c0 d _g_ptr_table
+                 U _getflag
+                 U _getmod
+                 U _gettypefmt
+                 U _i_fmt
+                 U _malloc
+                 U _p_fmt
+00000000000000b0 T _parse_format
+0000000000000320 T _parse_main
+                 U _percent
+                 U _str_fmt
+                 U _x_fmt

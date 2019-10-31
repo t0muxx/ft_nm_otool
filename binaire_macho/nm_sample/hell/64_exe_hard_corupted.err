@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm_sample/hell/64_exe_hard_corupted truncated or malformed object (offset field plus size field of section 0 in LC_SEGMENT_64 command 1 extends past the end of the file)
+

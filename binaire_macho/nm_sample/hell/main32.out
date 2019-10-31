@@ -1,0 +1,5 @@
+00001f4e t ___x86.get_pc_thunk.bx
+00001000 T __mh_execute_header
+00001e63 T _main
+         U _printf
+         U dyld_stub_binder

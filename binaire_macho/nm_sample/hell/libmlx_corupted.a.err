@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm_sample/hell/libmlx_corupted.a truncated or malformed archive (offset to next archive member past the end of the archive after member mlx_shaders.o)
+
