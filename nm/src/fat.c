@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 12:02:46 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:16:52 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,17 @@ int	search_cputype_x64(t_infile *file, unsigned long magic_bytes)
 	while (i < reverse_32(1, fat_header->nfat_arch))
 	{
 		if (magic_bytes == FAT_MAGIC || magic_bytes == FAT_CIGAM)
+		{
+			if ((void *)fat_arch + sizeof(struct fat_arch) > (void *)file->start + file->sz)
+				return (error_gen("corrupted far_arch"));
 			offset = reverse_32(1, ((struct fat_arch *)fat_arch)->offset);
+		}
 		else if (magic_bytes == FAT_MAGIC_64 || magic_bytes == FAT_CIGAM_64)
+		{
+			if ((void *)fat_arch + sizeof(struct fat_arch_64) > (void *)file->start + file->sz)
+				return (error_gen("corrupted far_arch"));
 			offset = reverse_64(1, ((struct fat_arch_64 *)fat_arch)->offset);
+		}
 		if (reverse_32(1, ((struct fat_arch *)fat_arch)->cputype) == CPU_TYPE_X86_64)
 		{
 			file->start = (void *)file->start + offset;
