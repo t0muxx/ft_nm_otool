@@ -6,14 +6,56 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 15:52:31 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 10:09:23 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
+void		lst_symbol_swap(t_symbol *node1, t_symbol *node2)
+{
+	t_symbol	temp;
+	size_t		lenght;
+
+	lenght = sizeof(t_symbol) - sizeof(t_symbol *);
+	ft_memcpy(&temp, node1, lenght);
+	ft_memcpy(node1, node2, lenght);
+	ft_memcpy(node2, &temp, lenght);
+}
+
+void lst_symbol_sort(t_symbol *start)
+{
+    int swapped;
+    t_symbol *ptr1;
+    t_symbol *lptr;
+
+	lptr = NULL;
+    if (start == NULL)
+        return;
+	swapped = 1;
+    while (swapped)
+	{
+        swapped = 0;
+        ptr1 = start;
+        while (ptr1->next != lptr)
+        {
+            if (ft_strcmp(ptr1->symbol_name, ptr1->next->symbol_name) > 0 ||
+				(!ft_strcmp(ptr1->symbol_name, ptr1->next->symbol_name) &&
+				ptr1->symb_value > ptr1->next->symb_value))
+            {
+                lst_symbol_swap(ptr1, ptr1->next);
+                swapped = 1;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    }
+}
+
+
 void		lst_symbol_print_64(t_symbol *head)
 {
+	lst_symbol_sort(head);
 	while (head)
 	{
 		if (head->symb_char != 'U')
@@ -37,6 +79,7 @@ void		lst_symbol_print_64(t_symbol *head)
 
 void		lst_symbol_print_32(t_symbol *head)
 {
+	lst_symbol_sort(head);
 	while (head)
 	{
 		if (head->symb_char != 'U')
@@ -110,30 +153,3 @@ void		lst_symbol_append_nosort(t_symbol **head, t_symbol *new)
 	return ;
 
 }
-
-void		lst_symbol_append(t_symbol **last, t_symbol *new)
-{
-	t_symbol *current;
-
-	if (*last == NULL ||
-			ft_strcmp((*last)->symbol_name, new->symbol_name) > 0)
-	{
-		new->next = *last;
-		*last = new;
-	}
-	else
-	{
-		current = *last;
-		while (current->next != NULL &&
-		ft_strcmp(current->next->symbol_name, new->symbol_name) <= 0)
-			current = current->next;
-		while (current->next != NULL && 
-				!ft_strcmp(current->next->symbol_name, new->symbol_name)
-				&& new->symb_value > current->next->symb_value)
-			current = current->next;
-		new->next = current->next;
-		current->next = new;
-	}
-	return ;
-}
-

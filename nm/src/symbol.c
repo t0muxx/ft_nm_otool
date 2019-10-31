@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 13:58:02 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 10:06:31 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	parse_symtab_add_sym(t_infile *file, void *sym,
 			file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_un.n_strx);
 		sym_value = reverse_64(file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_value);
 	}
-//	printf("added symbol befo %s  with value : %#lx\n",sym_name, sym_value);
 	if ((void *)sym_name > (void *)file->start + file->sz 
 		|| (void *)sym_name > (void *)strtab + strsize)
 	{
@@ -49,8 +48,7 @@ void	parse_symtab_add_sym(t_infile *file, void *sym,
 		lst_symbol_new(sym, sym_name, protected_strlen(sym_name, file),sym_value));
 		return;
 	}
-//	printf("added symbol with value : %#lx\n", sym_value);
-	lst_symbol_append(&file->symbols, 
+	lst_symbol_append_nosort(&file->symbols, 
 	lst_symbol_new(sym, sym_name, protected_strlen(sym_name, file),sym_value));
 
 }
