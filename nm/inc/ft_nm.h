@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 08:07:54 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 09:06:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef	struct	s_infile
 	char		*filename;
 	uint8_t		type;
 	void		*start;
+	void		*save;
 	void		*current;
 	size_t		sz;
 	void		*mac_header;

@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 16:10:16 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 09:06:30 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 					MAP_PRIVATE, fd, 0)) == MAP_FAILED)
 		return (-1);
 	(*infile)->current = (*infile)->start;
+	(*infile)->save = (*infile)->start;
 	(*infile)->sz = 0;
 	(*infile)->type = 0;
 	(*infile)->mac_header = NULL;

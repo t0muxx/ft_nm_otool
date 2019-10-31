@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 16:18:40 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 09:06:02 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	process_args(char *file)
 		free(infile);
 		return (-1);
 	}
-	munmap(infile->start, infile->sz);
+	munmap(infile->save, infile->sz);
 	free(infile->filename);
 	free(infile);
 	return (0);
