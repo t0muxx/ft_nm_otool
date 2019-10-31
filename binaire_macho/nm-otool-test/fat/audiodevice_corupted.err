@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/fat/audiodevice_corupted truncated or malformed fat file (offset plus size of cputype (18) cpusubtype (0) extends past the end of the file)
+

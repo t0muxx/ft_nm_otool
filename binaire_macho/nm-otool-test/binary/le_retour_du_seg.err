@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/binary/le_retour_du_seg truncated or malformed object (section contents at offset 43914 with a size of 66, overlaps section contents at offset 3392 with a size of 41289)
+

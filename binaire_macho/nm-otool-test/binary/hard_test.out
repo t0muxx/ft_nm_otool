@@ -1,0 +1,15 @@
+                 U ___sprintf_chk
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000100000000 T __mh_execute_header
+                 U _close
+                 U _dprintf
+                 U _fstat$INODE64
+0000000100000ac0 T _main
+                 U _mmap
+                 U _munmap
+                 U _open
+                 U _printf
+                 U _system
+                 U _write
+                 U dyld_stub_binder

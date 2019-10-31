@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/binary/ls_growed_7_data_section_number truncated or malformed object (load command 2 inconsistent cmdsize in LC_SEGMENT_64 for the number of sections)
+

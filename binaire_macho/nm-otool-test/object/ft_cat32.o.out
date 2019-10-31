@@ -1,0 +1,8 @@
+         U _ft_bzero
+00000019 T _ft_cat
+         U _ft_putstr
+         U _ft_strlen
+0000006b b content
+0000005c d error
+00000009 t put_error
+00000000 t quit

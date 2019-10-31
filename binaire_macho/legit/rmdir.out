@@ -1,0 +1,11 @@
+                 U ___stderrp
+0000000100000000 T __mh_execute_header
+                 U _exit
+                 U _fwrite
+                 U _getopt
+                 U _optind
+                 U _rmdir
+                 U _strlen
+                 U _strrchr
+                 U _warn
+                 U dyld_stub_binder

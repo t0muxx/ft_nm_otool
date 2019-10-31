@@ -1,0 +1,4 @@
+0000000d T _ft_bzero
+         U _ft_strlen
+00000001 t loop
+00000000 t quit

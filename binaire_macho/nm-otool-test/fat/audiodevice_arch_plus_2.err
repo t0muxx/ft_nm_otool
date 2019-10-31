@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/fat/audiodevice_arch_plus_2 truncated or malformed fat file (cputype (0) cpusubtype (0) offset 0 overlaps universal headers)
+

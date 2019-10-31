@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/binary/corr2 truncated or malformed object (offset field of section 1 in LC_SEGMENT_64 command 1 not past the headers of the file)
+

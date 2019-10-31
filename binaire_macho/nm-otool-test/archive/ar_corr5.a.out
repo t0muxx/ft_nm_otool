@@ -1,0 +1,976 @@
+
+nm-otool-test/archive/ar_corr5.a(ft_atoi.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000007e0 t _asan.module_ctor
+0000000000000000 T _ft_atoi
+0000000000000610 t _ft_test_sign
+
+nm-otool-test/archive/ar_corr5.a(ft_atol.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000007f0 t _asan.module_ctor
+0000000000000000 T _ft_atol
+0000000000000620 t _ft_test_sign
+
+nm-otool-test/archive/ar_corr5.a(ft_atoll.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000007f0 t _asan.module_ctor
+0000000000000000 T _ft_atoll
+0000000000000620 t _ft_test_sign
+
+nm-otool-test/archive/ar_corr5.a(ft_bzero.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+0000000000000000 T _ft_bzero
+                 U _ft_memset
+
+nm-otool-test/archive/ar_corr5.a(ft_close.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+                 U _close
+0000000000000000 T _ft_close
+                 U _ft_itoa
+                 U _perror
+
+nm-otool-test/archive/ar_corr5.a(ft_closedir.o):
+00000000000000a0 s _.str
+0000000000000170 s ___asan_binder_.str
+0000000000000130 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000060 t _asan.module_ctor
+0000000000000080 t _asan.module_dtor
+                 U _closedir
+0000000000000000 T _ft_closedir
+                 U _perror
+00000000000000e8 s l___asan_gen_
+0000000000000118 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_exit.o):
+                 U ___asan_handle_no_return
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+                 U _exit
+0000000000000000 T _ft_exit
+                 U _ft_putendl
+
+nm-otool-test/archive/ar_corr5.a(ft_freetab.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000b0 t _asan.module_ctor
+                 U _free
+0000000000000000 T _ft_freetab
+                 U _ft_strdel
+
+nm-otool-test/archive/ar_corr5.a(ft_isalnum.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+0000000000000000 T _ft_isalnum
+                 U _ft_isalpha
+                 U _ft_isdigit
+
+nm-otool-test/archive/ar_corr5.a(ft_isalpha.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+0000000000000000 T _ft_isalpha
+
+nm-otool-test/archive/ar_corr5.a(ft_isascii.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000000 T _ft_isascii
+
+nm-otool-test/archive/ar_corr5.a(ft_isdigit.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000000 T _ft_isdigit
+
+nm-otool-test/archive/ar_corr5.a(ft_isprint.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000000 T _ft_isprint
+
+nm-otool-test/archive/ar_corr5.a(ft_itoa_base.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load4
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_stack_malloc_1
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000aa0 t _asan.module_ctor
+0000000000000000 T _ft_itoa_base
+                 U _malloc
+0000000000000710 t _numb_len
+
+nm-otool-test/archive/ar_corr5.a(ft_itoa.o):
+0000000000000720 s _.str
+0000000000000800 s ___asan_binder_.str
+00000000000007c0 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_register_image_globals
+                 U ___asan_report_load4
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_stack_malloc_3
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+00000000000006e0 t _asan.module_ctor
+0000000000000700 t _asan.module_dtor
+0000000000000000 T _ft_itoa
+                 U _ft_strdup
+0000000000000340 t _ft_writenbr
+000000000000079d s l___asan_gen_.1
+00000000000007a8 s l___asan_gen_.4
+
+nm-otool-test/archive/ar_corr5.a(ft_lstaddback.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000140 t _asan.module_ctor
+0000000000000000 T _ft_lstaddback
+
+nm-otool-test/archive/ar_corr5.a(ft_lstadd.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000d0 t _asan.module_ctor
+0000000000000000 T _ft_lstadd
+
+nm-otool-test/archive/ar_corr5.a(ft_lstat.o):
+0000000000000080 s _.str
+0000000000000140 s ___asan_binder_.str
+0000000000000100 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_handle_no_return
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+0000000000000070 t _asan.module_dtor
+                 U _ft_exit
+0000000000000000 T _ft_lstat
+                 U _lstat$INODE64
+00000000000000c8 s l___asan_gen_
+00000000000000f0 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_lstdel.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000170 t _asan.module_ctor
+                 U _free
+0000000000000000 T _ft_lstdel
+
+nm-otool-test/archive/ar_corr5.a(ft_lstdelone.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001b0 t _asan.module_ctor
+                 U _free
+0000000000000000 T _ft_lstdelone
+
+nm-otool-test/archive/ar_corr5.a(ft_lstiter.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000070 t _asan.module_ctor
+0000000000000000 T _ft_lstiter
+
+nm-otool-test/archive/ar_corr5.a(ft_lstlast.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000340 t _asan.module_ctor
+0000000000000000 T _ft_lstlast
+
+nm-otool-test/archive/ar_corr5.a(ft_lstlen.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000e0 t _asan.module_ctor
+0000000000000000 T _ft_lstlen
+
+nm-otool-test/archive/ar_corr5.a(ft_lstmap.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000200 t _asan.module_ctor
+0000000000000000 T _ft_lstmap
+                 U _ft_lstnew
+
+nm-otool-test/archive/ar_corr5.a(ft_lstnew.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000240 t _asan.module_ctor
+0000000000000000 T _ft_lstnew
+                 U _ft_memcpy
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_ltoa.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load4
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_stack_malloc_3
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000640 t _asan.module_ctor
+0000000000000000 T _ft_ltoa
+                 U _ft_strdup
+00000000000002c0 t _ft_writenbr
+
+nm-otool-test/archive/ar_corr5.a(ft_memalloc.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000070 t _asan.module_ctor
+0000000000000000 T _ft_memalloc
+                 U _ft_memset
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_memccpy.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001c0 t _asan.module_ctor
+0000000000000000 T _ft_memccpy
+
+nm-otool-test/archive/ar_corr5.a(ft_memchr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000e0 t _asan.module_ctor
+0000000000000000 T _ft_memchr
+
+nm-otool-test/archive/ar_corr5.a(ft_memcmp.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000220 t _asan.module_ctor
+0000000000000000 T _ft_memcmp
+
+nm-otool-test/archive/ar_corr5.a(ft_memcpy.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000110 t _asan.module_ctor
+0000000000000000 T _ft_memcpy
+
+nm-otool-test/archive/ar_corr5.a(ft_memdel.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000e0 t _asan.module_ctor
+                 U _free
+0000000000000000 T _ft_memdel
+
+nm-otool-test/archive/ar_corr5.a(ft_memmove.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000230 t _asan.module_ctor
+                 U _free
+                 U _ft_memalloc
+0000000000000000 T _ft_memmove
+
+nm-otool-test/archive/ar_corr5.a(ft_memset.o):
+                 U ___asan_init
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000b0 t _asan.module_ctor
+0000000000000000 T _ft_memset
+
+nm-otool-test/archive/ar_corr5.a(ft_newmap.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000160 t _asan.module_ctor
+                 U _ft_memset
+0000000000000000 T _ft_newmap
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_newtab.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store1
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000002f0 t _asan.module_ctor
+                 U _ft_memset
+0000000000000000 T _ft_newtab
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_opendir.o):
+00000000000000c0 s _.str
+0000000000000190 s ___asan_binder_.str
+0000000000000150 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_report_store8
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000080 t _asan.module_ctor
+00000000000000a0 t _asan.module_dtor
+0000000000000000 T _ft_opendir
+                 U _ft_putstr
+                 U _opendir$INODE64
+                 U _perror
+0000000000000108 s l___asan_gen_
+0000000000000138 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_openfile.o):
+0000000000000080 s _.str
+0000000000000150 s ___asan_binder_.str
+0000000000000110 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_handle_no_return
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+0000000000000070 t _asan.module_dtor
+                 U _ft_exit
+0000000000000000 T _ft_openfile
+                 U _open
+00000000000000c8 s l___asan_gen_
+00000000000000f8 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_print_memory.o):
+0000000000000340 s _.str
+0000000000000380 s _.str.1
+00000000000004c0 s ___asan_binder_.str
+00000000000004d0 s ___asan_binder_.str.1
+0000000000000440 s ___asan_global_.str
+0000000000000480 s ___asan_global_.str.1
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_report_load1
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000300 t _asan.module_ctor
+0000000000000320 t _asan.module_dtor
+0000000000000000 T _ft_print_memory
+                 U _ft_putchar
+                 U _ft_putchar_base
+                 U _ft_putstr
+0000000000000170 t _print_char
+0000000000000080 t _print_hex
+00000000000003c8 s l___asan_gen_
+0000000000000420 s l___asan_gen_.4
+0000000000000430 s l___asan_gen_.7
+
+nm-otool-test/archive/ar_corr5.a(ft_print_ptr.o):
+0000000000000240 s _.str
+0000000000000280 s _.str.1
+00000000000003d0 s ___asan_binder_.str
+00000000000003e0 s ___asan_binder_.str.1
+0000000000000350 s ___asan_global_.str
+0000000000000390 s ___asan_global_.str.1
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_register_image_globals
+                 U ___asan_report_load1
+                 U ___asan_report_store8
+                 U ___asan_stack_malloc_0
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000210 t _asan.module_ctor
+0000000000000230 t _asan.module_dtor
+0000000000000000 T _ft_print_ptr
+                 U _ft_putchar_base
+                 U _ft_putstr
+000000000000031b s l___asan_gen_.2
+0000000000000330 s l___asan_gen_.5
+0000000000000340 s l___asan_gen_.8
+
+nm-otool-test/archive/ar_corr5.a(ft_printtab.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000190 t _asan.module_ctor
+0000000000000000 T _ft_printtab
+                 U _ft_putstr
+
+nm-otool-test/archive/ar_corr5.a(ft_putchar_base.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000100 t _asan.module_ctor
+                 U _ft_putchar
+0000000000000000 T _ft_putchar_base
+
+nm-otool-test/archive/ar_corr5.a(ft_putchar.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_store1
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+00000000000001a0 t _asan.module_ctor
+0000000000000000 T _ft_putchar
+                 U _write
+
+nm-otool-test/archive/ar_corr5.a(ft_putchar_fd.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_store1
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+00000000000001b0 t _asan.module_ctor
+0000000000000000 T _ft_putchar_fd
+                 U _write
+
+nm-otool-test/archive/ar_corr5.a(ft_putendl.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar
+0000000000000000 T _ft_putendl
+                 U _ft_putstr
+
+nm-otool-test/archive/ar_corr5.a(ft_putendlcol.o):
+0000000000000080 s _.str
+0000000000000150 s ___asan_binder_.str
+0000000000000110 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000060 t _asan.module_dtor
+                 U _ft_putendl
+0000000000000000 T _ft_putendlcol
+                 U _ft_putstr
+00000000000000c8 s l___asan_gen_
+0000000000000100 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_putendl_fd.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar_fd
+0000000000000000 T _ft_putendl_fd
+                 U _ft_putstr_fd
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbr.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000090 t _asan.module_ctor
+                 U _ft_putchar
+0000000000000000 T _ft_putnbr
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbrendl.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar
+                 U _ft_putnbr
+0000000000000000 T _ft_putnbrendl
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbrendl_fd.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar_fd
+                 U _ft_putnbr_fd
+0000000000000000 T _ft_putnbrendl_fd
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbr_fd.o):
+0000000000000100 s _.str
+00000000000001d0 s ___asan_binder_.str
+0000000000000190 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000c0 t _asan.module_ctor
+00000000000000e0 t _asan.module_dtor
+                 U _ft_putchar_fd
+0000000000000000 T _ft_putnbr_fd
+                 U _ft_putstr_fd
+0000000000000148 s l___asan_gen_
+0000000000000178 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbrspace.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar
+                 U _ft_putnbr
+0000000000000000 T _ft_putnbrspace
+
+nm-otool-test/archive/ar_corr5.a(ft_putnbrspace_fd.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar_fd
+                 U _ft_putnbr_fd
+0000000000000000 T _ft_putnbrspace_fd
+
+nm-otool-test/archive/ar_corr5.a(ft_putspace.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar
+0000000000000000 T _ft_putspace
+                 U _ft_putstr
+
+nm-otool-test/archive/ar_corr5.a(ft_putspace_fd.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000030 t _asan.module_ctor
+                 U _ft_putchar_fd
+0000000000000000 T _ft_putspace_fd
+                 U _ft_putstr_fd
+
+nm-otool-test/archive/ar_corr5.a(ft_putstr.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000000 T _ft_putstr
+                 U _ft_strlen
+                 U _write
+
+nm-otool-test/archive/ar_corr5.a(ft_putstrcol.o):
+0000000000000080 s _.str
+0000000000000150 s ___asan_binder_.str
+0000000000000110 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000060 t _asan.module_dtor
+                 U _ft_putstr
+0000000000000000 T _ft_putstrcol
+00000000000000c8 s l___asan_gen_
+00000000000000f8 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_putstrcol_fd.o):
+00000000000000e0 s _.str
+00000000000001b0 s ___asan_binder_.str
+0000000000000170 s ___asan_global_.str
+0000000000000008 C ___asan_globals_registered
+                 U ___asan_init
+                 U ___asan_register_image_globals
+                 U ___asan_unregister_image_globals
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000a0 t _asan.module_ctor
+00000000000000c0 t _asan.module_dtor
+0000000000000000 T _ft_putstrcol_fd
+                 U _ft_strlen
+                 U _write
+0000000000000128 s l___asan_gen_
+0000000000000160 s l___asan_gen_.3
+
+nm-otool-test/archive/ar_corr5.a(ft_putstr_fd.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000050 t _asan.module_ctor
+0000000000000000 T _ft_putstr_fd
+                 U _ft_strlen
+                 U _write
+
+nm-otool-test/archive/ar_corr5.a(ft_rgbtohexa.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000110 t _asan.module_ctor
+0000000000000000 T _ft_rgbtohexa
+
+nm-otool-test/archive/ar_corr5.a(ft_strcat.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001b0 t _asan.module_ctor
+0000000000000000 T _ft_strcat
+                 U _ft_strlen
+
+nm-otool-test/archive/ar_corr5.a(ft_strchr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000180 t _asan.module_ctor
+0000000000000000 T _ft_strchr
+
+nm-otool-test/archive/ar_corr5.a(ft_strclr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000100 t _asan.module_ctor
+0000000000000000 T _ft_strclr
+
+nm-otool-test/archive/ar_corr5.a(ft_strcmp.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000270 t _asan.module_ctor
+0000000000000000 T _ft_strcmp
+
+nm-otool-test/archive/ar_corr5.a(ft_strcpy.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001a0 t _asan.module_ctor
+0000000000000000 T _ft_strcpy
+
+nm-otool-test/archive/ar_corr5.a(ft_strdel.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000020 t _asan.module_ctor
+                 U _ft_memdel
+0000000000000000 T _ft_strdel
+
+nm-otool-test/archive/ar_corr5.a(ft_strdup.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000080 t _asan.module_ctor
+                 U _ft_strcpy
+0000000000000000 T _ft_strdup
+                 U _ft_strlen
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_strequ.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000230 t _asan.module_ctor
+0000000000000000 T _ft_strequ
+                 U _ft_strlen
+
+nm-otool-test/archive/ar_corr5.a(ft_strfill.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load1
+                 U ___asan_report_load4
+                 U ___asan_report_load8
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_report_store8
+                 U ___asan_stack_malloc_1
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000dc0 t _asan.module_ctor
+                 U _ft_strdel
+                 U _ft_strdup
+0000000000000000 T _ft_strfill
+                 U _ft_strlen
+                 U _ft_strnew
+                 U _ft_strtrim
+0000000000000b10 t _skip_blank
+
+nm-otool-test/archive/ar_corr5.a(ft_striter.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000b0 t _asan.module_ctor
+0000000000000000 T _ft_striter
+
+nm-otool-test/archive/ar_corr5.a(ft_striteri.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000c0 t _asan.module_ctor
+0000000000000000 T _ft_striteri
+
+nm-otool-test/archive/ar_corr5.a(ft_strjoin.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000240 t _asan.module_ctor
+                 U _ft_memalloc
+                 U _ft_strcpy
+0000000000000000 T _ft_strjoin
+                 U _ft_strlen
+
+nm-otool-test/archive/ar_corr5.a(ft_strjoin_replace.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000280 t _asan.module_ctor
+                 U _ft_strdel
+                 U _ft_strdup
+                 U _ft_strjoin
+0000000000000000 T _ft_strjoin_replace
+
+nm-otool-test/archive/ar_corr5.a(ft_strlcat.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000360 t _asan.module_ctor
+0000000000000000 T _ft_strlcat
+                 U _ft_strlen
+
+nm-otool-test/archive/ar_corr5.a(ft_strlen.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000a0 t _asan.module_ctor
+0000000000000000 T _ft_strlen
+
+nm-otool-test/archive/ar_corr5.a(ft_strmap.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001c0 t _asan.module_ctor
+                 U _ft_strcpy
+                 U _ft_strlen
+0000000000000000 T _ft_strmap
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_strmapi.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001d0 t _asan.module_ctor
+                 U _ft_memalloc
+                 U _ft_strcpy
+                 U _ft_strlen
+0000000000000000 T _ft_strmapi
+
+nm-otool-test/archive/ar_corr5.a(ft_strncat.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001e0 t _asan.module_ctor
+                 U _ft_strlen
+0000000000000000 T _ft_strncat
+
+nm-otool-test/archive/ar_corr5.a(ft_strncmp.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000002d0 t _asan.module_ctor
+0000000000000000 T _ft_strncmp
+
+nm-otool-test/archive/ar_corr5.a(ft_strncpy.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001f0 t _asan.module_ctor
+0000000000000000 T _ft_strncpy
+
+nm-otool-test/archive/ar_corr5.a(ft_strnequ.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000220 t _asan.module_ctor
+0000000000000000 T _ft_strnequ
+
+nm-otool-test/archive/ar_corr5.a(ft_strnew.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000070 t _asan.module_ctor
+                 U _ft_memset
+0000000000000000 T _ft_strnew
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_strnstr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000002f0 t _asan.module_ctor
+                 U _ft_strlen
+0000000000000000 T _ft_strnstr
+
+nm-otool-test/archive/ar_corr5.a(ft_strrchr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000180 t _asan.module_ctor
+0000000000000000 T _ft_strrchr
+
+nm-otool-test/archive/ar_corr5.a(ft_strsplit.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000760 t _asan.module_ctor
+0000000000000000 T _ft_strsplit
+                 U _ft_strsub
+                 U _malloc
+0000000000000650 t _word_len
+0000000000000320 t _word_nbr
+
+nm-otool-test/archive/ar_corr5.a(ft_strstr.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000210 t _asan.module_ctor
+                 U _ft_strlen
+0000000000000000 T _ft_strstr
+
+nm-otool-test/archive/ar_corr5.a(ft_strsub.o):
+                 U ___asan_init
+                 U ___asan_report_load1
+                 U ___asan_report_store1
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001b0 t _asan.module_ctor
+0000000000000000 T _ft_strsub
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_strtrim2.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load1
+                 U ___asan_report_load4
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000830 t _asan.module_ctor
+                 U _ft_memalloc
+0000000000000640 t _ft_skip_blank
+                 U _ft_strdup
+                 U _ft_strlen
+0000000000000000 T _ft_strtrim2
+
+nm-otool-test/archive/ar_corr5.a(ft_strtrim.o):
+                 U ___asan_init
+                 U ___asan_option_detect_stack_use_after_return
+                 U ___asan_report_load1
+                 U ___asan_report_load4
+                 U ___asan_report_load8
+                 U ___asan_report_store1
+                 U ___asan_report_store4
+                 U ___asan_report_store8
+                 U ___asan_stack_malloc_0
+                 U ___asan_version_mismatch_check_apple_802
+                 U ___stack_chk_fail
+                 U ___stack_chk_guard
+0000000000000c00 t _asan.module_ctor
+0000000000000560 t _end_function
+                 U _ft_memalloc
+                 U _ft_strdel
+                 U _ft_strdup
+                 U _ft_strlen
+0000000000000000 T _ft_strtrim
+
+nm-otool-test/archive/ar_corr5.a(ft_tabadd.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000001f0 t _asan.module_ctor
+                 U _ft_freetab
+                 U _ft_strdup
+0000000000000000 T _ft_tabadd
+                 U _ft_tablen
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_tabdup.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000170 t _asan.module_ctor
+                 U _ft_strdup
+0000000000000000 T _ft_tabdup
+                 U _ft_tablen
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_tablen.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_version_mismatch_check_apple_802
+00000000000000a0 t _asan.module_ctor
+0000000000000000 T _ft_tablen
+
+nm-otool-test/archive/ar_corr5.a(ft_tabtolst.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000250 t _asan.module_ctor
+                 U _ft_lstaddback
+                 U _ft_lstnew
+                 U _ft_strlen
+0000000000000000 T _ft_tabtolst
+
+nm-otool-test/archive/ar_corr5.a(ft_tabtrim.o):
+                 U ___asan_init
+                 U ___asan_report_load8
+                 U ___asan_report_store8
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000180 t _asan.module_ctor
+                 U _ft_freetab
+                 U _ft_strtrim
+                 U _ft_tablen
+0000000000000000 T _ft_tabtrim
+                 U _malloc
+
+nm-otool-test/archive/ar_corr5.a(ft_tolower.o):
+                 U ___asan_init
+                 U ___asan_version_mismatch_check_apple_802
+0000000000000040 t _asan.module_ctor
+0000000000000000 T _ft_tolower

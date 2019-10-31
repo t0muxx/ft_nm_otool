@@ -1,0 +1,32 @@
+
+nm-otool-test/archive/test.a(simple.o):
+0000000000000000 T _foo
+0000000000000070 d _foo.lolstaticz
+0000000000000130 b _foo.tab_of_ints
+0000000000000004 C _i_am_volatile
+0000000000000068 D _i_am_volatile_and_initialized
+0000000000000060 D _i_have_a_fiiiiiiiiiiiiiiiiiiiiiiiiish
+0000000000000058 D _i_have_a_fish
+0000000000000004 C _i_have_no_value
+0000000000000078 S _im_const_initialized
+0000000000000004 C _im_const_uninitialized
+0000000000000004 C _im_const_volatile_1
+000000000000007c S _im_const_volatile_2
+0000000000000010 T _main
+                 U _printf
+
+nm-otool-test/archive/test.a(simple.o):
+0000000000000000 T _foo
+0000000000000070 d _foo.lolstaticz
+0000000000000130 b _foo.tab_of_ints
+0000000000000004 C _i_am_volatile
+0000000000000068 D _i_am_volatile_and_initialized
+0000000000000060 D _i_have_a_fiiiiiiiiiiiiiiiiiiiiiiiiish
+0000000000000058 D _i_have_a_fish
+0000000000000004 C _i_have_no_value
+0000000000000078 S _im_const_initialized
+0000000000000004 C _im_const_uninitialized
+0000000000000004 C _im_const_volatile_1
+000000000000007c S _im_const_volatile_2
+0000000000000010 T _main
+                 U _printf

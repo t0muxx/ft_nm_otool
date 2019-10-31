@@ -1,0 +1,4 @@
+00001000 T __mh_execute_header
+00001f40 T _main
+         U _write$UNIX2003
+         U dyld_stub_binder
