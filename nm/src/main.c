@@ -6,11 +6,16 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 09:06:02 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:33:40 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
+
+/* TODO : MULTI ARGS
+ * archive
+ * moar tests
+ * */
 
 int	process_macho(t_infile *infile)
 {
