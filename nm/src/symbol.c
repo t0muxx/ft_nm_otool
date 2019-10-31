@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 10:06:31 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 11:01:32 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	protected_strlen(char *str, t_infile *file)
 	size_t i;
 
 	i = 0;
-	while (((void *)str + i < (void *)file->start + file->sz) && str[i])
+	while (((void *)str + i < (void *)file->save + file->sz) && str[i])
 		i++;
 	return (i);
 }
@@ -40,7 +40,7 @@ void	parse_symtab_add_sym(t_infile *file, void *sym,
 			file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_un.n_strx);
 		sym_value = reverse_64(file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_value);
 	}
-	if ((void *)sym_name > (void *)file->start + file->sz 
+	if ((void *)sym_name > (void *)file->save + file->sz 
 		|| (void *)sym_name > (void *)strtab + strsize)
 	{
 		sym_name = "bad string index";
@@ -65,7 +65,7 @@ void	parse_symtab_iter_64(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	while (i < nsymb)
 	{
 		if (!((void *)(struct nlist_64 *)(sym_data + i)
-			> (void *)file->start + file->sz)
+			> (void *)file->save + file->sz)
 		&& !(sym_data[i].n_type & N_STAB))
 		{
 			if (!(sym_data[i].n_type & N_STAB))
@@ -91,7 +91,7 @@ void	parse_symtab_iter_32(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	while (i < nsymb)
 	{
 		if (!((void *)(struct nlist *)(sym_data + i)
-				> (void *)file->start + file->sz))
+				> (void *)file->save + file->sz))
 		{
 //			printf("n_type = %#x\n", sym_data[i].n_type);
 			if (!(sym_data[i].n_type & N_STAB))
@@ -120,7 +120,7 @@ int	parse_symtab(t_infile *file, struct symtab_command *st)
 	if ((void *) file->start
 		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->stroff)
 		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->strsize)
-		> (void *)file->start + file->sz)
+		> (void *)file->save + file->sz)
 		return (-1);
 //	printf("parse_sym noerr : \n");
 	if (file->type == IS_32 || file->type == IS_BE)

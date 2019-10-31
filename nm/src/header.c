@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 15:13:21 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 11:02:02 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	process_header_full(t_infile *infile)
 	if (infile->type == IS_32 || infile->type == IS_BE )
 	{
 		if ((void *)infile->start + sizeof(struct mach_header)
-				> (void *)infile->start + infile->sz)
+				> (void *)infile->save + infile->sz)
 			return (error_gen("file size inferior to header size"));
 	}
 	if (infile->type == IS_64 || infile->type == IS_BE_64)
 	{
 		if ((void *)infile->start + sizeof(struct mach_header_64)
-				> (void *)infile->start + infile->sz)
+				> (void *)infile->save + infile->sz)
 			return (error_gen("file size inferior to header size"));
 	}
 	infile->mac_header = infile->start;
@@ -39,8 +39,8 @@ int	process_header(t_infile *infile)
 	unsigned long magic_bytes;
 
 	magic_bytes = 0;
-	if ((void *)infile->start + sizeof(unsigned long)
-			> (void *)infile->start + infile->sz)
+	if ((void *)infile->start + sizeof(uint32_t)
+			> (void *)infile->save + infile->sz)
 		return (error_gen("corrupted header file"));
 	magic_bytes = *(uint32_t *)infile->start;
 	if (magic_bytes == MH_MAGIC)
