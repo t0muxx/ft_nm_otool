@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 16:02:25 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 08:07:54 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # else
 #	include <mach-o/loader.h>
 #	include <mach-o/nlist.h>
+#	include <mach/machine.h>
+#	include <mach-o/fat.h>
 # endif
 
 # define IS_32 1
