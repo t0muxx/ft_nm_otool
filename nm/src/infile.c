@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 09:06:30 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/10/31 14:26:31 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void		*process_infile_error(int fd, t_infile *infile,
 		char *path, char *msg)
 {
+	if (infile->filename)
+		free(infile->filename);
 	if (infile)
 		free(infile);
 	if (fd)
