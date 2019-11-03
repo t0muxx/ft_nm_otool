@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 09:06:12 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:27:07 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef	struct	s_infile
 
 }				t_infile;
 
+int			process_archive(t_infile *file);
 int			process_fat(t_infile *file);
 int			process_macho(t_infile *infile);
 t_infile	*process_infile(char *path);

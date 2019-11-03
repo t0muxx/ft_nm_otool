@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 11:57:00 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 17:04:23 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/03 17:43:34 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -746,6 +746,47 @@ struct nlist_64 {
 #define REFERENCE_FLAG_PRIVATE_UNDEFINED_LAZY		5
 
 
+/* Pre-4BSD archives had these magic numbers in them. */
+#define	OARMAG1	0177555
+#define	OARMAG2	0177545
+
+#define	ARMAG		"!<arch>\n"	/* ar "magic number" */
+#define	SARMAG		8		/* strlen(ARMAG); */
+
+#define	AR_EFMT1	"#1/"		/* extended format #1 */
+
+struct ar_hdr {
+	char ar_name[16];		/* name */
+	char ar_date[12];		/* modification time */
+	char ar_uid[6];			/* user id */
+	char ar_gid[6];			/* group id */
+	char ar_mode[8];		/* octal file permissions */
+	char ar_size[10];		/* size in bytes */
+#define	ARFMAG	"`\n"
+	char ar_fmag[2];		/* consistency check */
+};
+
+#define SYMDEF		"__.SYMDEF"
+#define SYMDEF_SORTED	"__.SYMDEF SORTED"
+
+#define	RANLIBMAG	"__.SYMDEF"	/* archive file name */
+#define	RANLIBSKEW	3		/* creation time offset */
+
+/*
+ * Structure of the __.SYMDEF table of contents for an archive.
+ * __.SYMDEF begins with a long giving the size in bytes of the ranlib
+ * structures which immediately follow, and then continues with a string
+ * table consisting of a long giving the number of bytes of strings which
+ * follow and then the strings themselves.  The ran_strx fields index the
+ * string table whose first byte is numbered 0.
+ */
+struct	ranlib {
+	union {
+		off_t	ran_strx;	/* string table index of */
+		char	*ran_name;	/* symbol defined by */
+	} ran_un;
+	off_t	ran_off;		/* library member at this offset */
+};
 
 
 #endif

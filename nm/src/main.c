@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 14:24:59 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:29:40 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,31 @@ int	process_macho(t_infile *infile)
 int	process_args(char *file)
 {
 	t_infile *infile;
+	int		ret;
 
+	ret = 0;
 	infile = NULL;
 	if (!(infile = process_infile(file)))
 	{
 		return (-1);
 	}
-	if (process_fat(infile) < 0)
+	if ((ret = process_archive(infile)) < 0)
+		return (-1);
+	else if (ret == 0)
+		return (0);
+	else
 	{
-		munmap(infile->start, infile->sz);
+		if (process_fat(infile) < 0)
+		{
+			munmap(infile->start, infile->sz);
+			free(infile->filename);
+			free(infile);
+			return (-1);
+		}
+		munmap(infile->save, infile->sz);
 		free(infile->filename);
 		free(infile);
-		return (-1);
 	}
-	munmap(infile->save, infile->sz);
-	free(infile->filename);
-	free(infile);
 	return (0);
 }
 
