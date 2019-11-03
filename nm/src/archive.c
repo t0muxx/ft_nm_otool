@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/03 18:53:17 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:55:48 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ int	print_archive_member(t_infile *file, struct ar_hdr *ar_header)
 
 int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 {
-	void	*save;
 	int		offset;
 
 	offset = 0;
-	save = file->start;
 	if ((void *)ar_header + sizeof(struct ar_hdr) + ft_atoi(ar_header->ar_size)
 		> (void *)file->start + file->sz)
 		return (-1);
 	file->start = (void *)ar_header + sizeof(struct ar_hdr) + ft_atoi(ar_header->ar_size);
-	while ((void *)file->start < (void *)save + file->sz)
+	while ((void *)file->start < (void *)file->save + file->sz)
 	{
 		ar_header = file->start;
 		offset = print_archive_member(file, ar_header);
@@ -49,6 +47,8 @@ int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 		//ft_print_mem(file->start, 32);
 		process_fat(file);
 		file->start = (void *)file->start + ft_atoi(ar_header->ar_size) - offset;
+		if ((void *)file->start > (void *)file->save + file->sz)
+			return (0);
 	}
 	return (0);
 }
