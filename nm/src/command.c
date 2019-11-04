@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:25:59 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 18:43:15 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int			iter_load_command(t_infile *infile)
 	{
 		if (iter_load_command_work(infile, lc, &cmdsize, totalsize) < 0)
 			return (-1);
+		if (cmdsize <= 0)
+			return (error_gen("cmdsize <= 0"));
 		lc = (void *)lc + cmdsize;
 		totalsize += cmdsize;
 		n_lcmds--;
