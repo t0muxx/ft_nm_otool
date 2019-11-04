@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:11:21 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/24 13:46:15 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:32:44 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ void		lst_section_append(t_section **head, t_section *new)
 	last->next = new;
 	return ;
 }
-
