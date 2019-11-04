@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 14:19:24 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:56:06 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,13 @@ int		parse_segment(t_infile *file, struct load_command *lc)
 {
 	if (file->type == IS_32 || file->type == IS_BE)
 	{
-		if ((void *)lc + sizeof(struct segment_command)
-				> (void *)file->save + file->sz)
+		if (protect(file, (void *)lc + sizeof(struct segment_command)) < 0)
 			return (0);
 		return (parse_segment_32(file, lc));
 	}
 	if (file->type == IS_64 || file->type == IS_BE_64)
 	{
-		if ((void *)lc + sizeof(struct segment_command_64)
-				> (void *)file->save + file->sz)
+		if (protect(file, (void *)lc + sizeof(struct segment_command_64)) < 0)
 			return (0);
 		return (parse_segment_64(file, lc));
 	}
