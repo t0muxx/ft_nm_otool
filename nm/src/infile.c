@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 12:06:22 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:32:24 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_infile	*process_infile(char *path)
 		return (process_infile_error(fd, NULL, path, "can't stat"));
 	if (!(infile = (t_infile *)malloc(sizeof(t_infile))))
 		return (process_infile_error(fd, NULL, path, "can't malloc"));
-	if (!(infile->filename = (char *)malloc(ft_strlen(path)+1)))
+	if (!(infile->filename = (char *)malloc(ft_strlen(path) + 1)))
 		return (process_infile_error(fd, NULL, path, "can't malloc"));
 	ft_strcpy(infile->filename, path);
 	infile->filename[ft_strlen(path)] = '\0';
