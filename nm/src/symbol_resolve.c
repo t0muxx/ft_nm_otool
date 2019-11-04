@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 08:46:56 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/30 13:55:08 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:53:55 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ char	symbol_resolve_sect(t_infile *file, uint8_t n_sect)
 	return ('S');
 }
 
-char	symbol_get_letter(t_infile *file, uint8_t n_type, uint8_t n_sect, uint64_t n_value)
+char	symbol_get_letter(t_infile *file, uint8_t n_type,
+		uint8_t n_sect, uint64_t n_value)
 {
-	char  c;
-	uint8_t type;
+	char	c;
+	uint8_t	type;
 
 	type = n_type & N_TYPE;
 	c = '?';
@@ -74,14 +75,14 @@ void	symbol_resolve(t_infile *infile)
 		if (infile->type == IS_32 || infile->type == IS_BE)
 		{
 			tmp->symb_char = symbol_get_letter(infile,
-				((struct nlist *)tmp->symbol)->n_type, 
+				((struct nlist *)tmp->symbol)->n_type,
 				((struct nlist *)tmp->symbol)->n_sect,
 				tmp->symb_value);
 		}
 		if (infile->type == IS_64 || infile->type == IS_BE_64)
 		{
 			tmp->symb_char = symbol_get_letter(infile,
-				((struct nlist_64 *)tmp->symbol)->n_type, 
+				((struct nlist_64 *)tmp->symbol)->n_type,
 				((struct nlist_64 *)tmp->symbol)->n_sect,
 				tmp->symb_value);
 		}
