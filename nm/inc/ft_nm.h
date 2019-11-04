@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 15:49:55 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:17:41 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ int			get_str_offset_archive(struct ar_hdr *ar_header);
 void		putstr_member_name(char *str, size_t len);
 
 int			search_cputype_x64(t_infile *file, unsigned long magic_bytes);
+void		fat_print_arch(t_infile *file, cpu_type_t cputype,
+						cpu_subtype_t cpusubtype);
 #endif
