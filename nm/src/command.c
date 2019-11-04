@@ -6,13 +6,13 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 14:54:06 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:25:59 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-int	parse_load_command(t_infile *infile, struct load_command *lc)
+int			parse_load_command(t_infile *infile, struct load_command *lc)
 {
 	uint32_t cmd_type;
 
@@ -30,15 +30,13 @@ int	parse_load_command(t_infile *infile, struct load_command *lc)
 		if (parse_symtab(infile, (struct symtab_command *)lc) < 0)
 			return (-1);
 	}
-	else 
-		;
 	return (0);
 }
 
-uint32_t get_load_command_num(t_infile *infile)
+uint32_t	get_load_command_num(t_infile *infile)
 {
-	uint32_t		 	n_lcmds;
-	
+	uint32_t	n_lcmds;
+
 	n_lcmds = 0;
 	if (infile->type == IS_32)
 		n_lcmds = ((struct mach_header *)infile->mac_header)->ncmds;
@@ -57,7 +55,7 @@ uint32_t get_load_command_num(t_infile *infile)
 	return (n_lcmds);
 }
 
-int	check_totalsize_load_command(t_infile *file, uint32_t totalsize)
+int			check_totalsize_load_command(t_infile *file, uint32_t totalsize)
 {
 	if (file->type == IS_32 || file->type == IS_BE)
 	{
@@ -74,7 +72,7 @@ int	check_totalsize_load_command(t_infile *file, uint32_t totalsize)
 	return (0);
 }
 
-int	iter_load_command_work(t_infile *infile, void *lc,
+int			iter_load_command_work(t_infile *infile, void *lc,
 		uint32_t *cmdsize, uint32_t totalsize)
 {
 	if (protect(infile, (void *)lc
@@ -82,7 +80,7 @@ int	iter_load_command_work(t_infile *infile, void *lc,
 		return (error_gen("corrupted load commands"));
 	*cmdsize = reverse_32(
 		infile->type == IS_BE || infile->type == IS_BE_64,
-		 ((struct load_command *)lc)->cmdsize);
+		((struct load_command *)lc)->cmdsize);
 	if (check_totalsize_load_command(infile, totalsize) < 0)
 		return (error_gen("corrupted load commands"));
 	if (parse_load_command(infile, (struct load_command *)lc) < 0)
@@ -92,9 +90,9 @@ int	iter_load_command_work(t_infile *infile, void *lc,
 	return (0);
 }
 
-int	iter_load_command(t_infile *infile)
+int			iter_load_command(t_infile *infile)
 {
-	uint32_t		 	n_lcmds;
+	uint32_t			n_lcmds;
 	void				*lc;
 	uint32_t			cmdsize;
 	uint32_t			totalsize;
