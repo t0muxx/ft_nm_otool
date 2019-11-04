@@ -6,58 +6,11 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 13:45:00 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:20:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
-
-void ft_putstr_len(char *str, size_t len)
-{
-	size_t i;
-
-	i = 0;
-	while (str[i] && ft_isprint(str[i]) && i < len)
-	{
-		if (str[i] != '\n' && str[i] != ' ')
-			write(1, &str[i], 1);
-		i++;
-	}
-}
-
-int	get_str_offset_archive(struct ar_hdr *ar_header)
-{
-	int	ret;
-
-	ret = 0;
-	if (!ft_strncmp(ar_header->ar_name, AR_EFMT1, ft_strlen(AR_EFMT1)))
-	{
-		ret = ft_atoi((char *)ar_header->ar_name + ft_strlen(AR_EFMT1));
-	}
-	return (ret);
-}
-
-int	print_archive_member(t_infile *file, struct ar_hdr *ar_header)
-{
-	char *name;
-	int ret;
-
-	ret = 0;
-	name = NULL;
-	if (!ft_strncmp(ar_header->ar_name, AR_EFMT1, ft_strlen(AR_EFMT1)))
-	{
-		name = (char *)ar_header + sizeof(struct ar_hdr);
-		ret = ft_atoi((char *)ar_header->ar_name + ft_strlen(AR_EFMT1));
-		ft_printf("\n%s(%s):\n", file->filename, name);
-	}
-	else
-	{
-		ft_printf("\n%s(", file->filename);
-		ft_putstr_len(ar_header->ar_name, 16);
-		ft_putstr("):\n");
-	}
-	return (ret);
-}
 
 void	archive_fw_symdef(t_infile *file, struct ar_hdr *ar_header)
 {
