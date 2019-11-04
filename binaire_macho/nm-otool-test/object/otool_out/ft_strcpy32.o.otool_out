@@ -1,0 +1,3 @@
+nm-otool-test/object/ft_strcpy32.o:
+Contents of (__TEXT,__text) section
+00000000	8a 06 88 07 47 46 3c 00 75 f6 c3 

@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/binary/ls_lc_growed': truncated or malformed object (load command 18 extends past the end all load commands in the file)

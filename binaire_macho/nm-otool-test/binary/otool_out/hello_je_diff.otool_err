@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/binary/hello_je_diff': truncated or malformed object (bad string table index: 1677721603 past the end of string table, for symbol at index 0)

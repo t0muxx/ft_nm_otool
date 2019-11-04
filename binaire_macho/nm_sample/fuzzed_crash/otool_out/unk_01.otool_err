@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm_sample/fuzzed_crash/unk_01': truncated or malformed fat file (align (2^93248) too large for cputype (12) cpusubtype (12) (maximum 2^15))

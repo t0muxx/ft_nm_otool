@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/fat/fat_corr1': truncated or malformed fat file (offset plus size of cputype (7) cpusubtype (3) extends past the end of the file)

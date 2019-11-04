@@ -1,0 +1,4 @@
+nm-otool-test/object/ft_bzero32.o:
+Contents of (__TEXT,__text) section
+00000000	c3 4e c6 04 37 00 83 fe 00 74 f5 eb f4 83 ff 00 
+00000010	74 ee 83 fe 00 74 e9 e8 e5 ff ff ff c3 

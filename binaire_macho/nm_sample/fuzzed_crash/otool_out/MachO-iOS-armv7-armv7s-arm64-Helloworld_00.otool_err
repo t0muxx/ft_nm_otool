@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm_sample/fuzzed_crash/MachO-iOS-armv7-armv7s-arm64-Helloworld_00': truncated or malformed fat file (cputype (0) cpusubtype (0) offset 0 overlaps universal headers)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm_sample/fuzzed_crash/MachO-iOS-armv7-armv7s-arm64-Helloworld_00': truncated or malformed fat file (cputype (0) cpusubtype (0) offset 0 overlaps universal headers)

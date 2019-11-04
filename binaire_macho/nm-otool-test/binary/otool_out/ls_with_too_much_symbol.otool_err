@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/binary/ls_with_too_much_symbol': truncated or malformed object (string table at offset 28148 with a size of 976, overlaps symbol table at offset 26168 with a size of 2112)
