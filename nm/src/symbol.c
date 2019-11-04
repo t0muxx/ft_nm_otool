@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 15:04:10 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:06:04 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	parse_symtab_add_sym(t_infile *file, void *sym,
 			file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_un.n_strx);
 		sym_value = reverse_64(file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_value);
 	}
-	if ((void *)sym_name > (void *)file->save + file->sz 
+	if (protect(file, (void *)sym_name) < 0 
 		|| (void *)sym_name > (void *)strtab + strsize)
 	{
 		sym_name = "bad string index";
