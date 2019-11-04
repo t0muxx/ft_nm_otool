@@ -6,14 +6,13 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 13:08:12 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:36:00 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
 /* TODO : MULTI ARGS
- * archive
  * moar tests
  * nm-otool-test/binary/ls_string_table_corr5 /!\
  * ppr or not ? nm-otool-test/fat/audiodevice
@@ -22,9 +21,8 @@
 
 int	process_normal(t_infile *infile)
 {
-//	ft_putstr("process_normal : \n");
 	if (process_header(infile) < 0)
-		return error_gen("corrupted fat header");
+		return (error_gen("corrupted fat header"));
 	if (iter_load_command(infile) < 0)
 	{
 		munmap(infile->start, infile->sz);
@@ -42,12 +40,10 @@ int	process_normal(t_infile *infile)
 	lst_section_free(infile->sections);
 	infile->sections = NULL;
 	return (0);
-
 }
 
 int	process_macho(t_infile *infile)
 {
-//	ft_putstr("process_macho : \n");
 	int (*func_array[3])(t_infile *file);
 	int ret;
 	int i;
@@ -60,7 +56,6 @@ int	process_macho(t_infile *infile)
 	while (i < 3)
 	{
 		ret = (*func_array[i])(infile);
-	//	printf("ret == %d et i == %d\n", ret, i);
 		if (ret < 0)
 			return (-1);
 		else if (ret == 0)
@@ -72,8 +67,8 @@ int	process_macho(t_infile *infile)
 
 int	process_args(char *file)
 {
-	t_infile *infile;
-	int		ret;
+	t_infile	*infile;
+	int			ret;
 
 	ret = 0;
 	infile = NULL;
