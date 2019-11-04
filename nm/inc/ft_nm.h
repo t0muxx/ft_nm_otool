@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 14:35:06 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:11:32 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_symbol	*lst_symbol_new(void *ptr, char *str,
 void		lst_symbol_free(t_symbol *head);
 void		lst_symbol_print_32(t_symbol *head);
 void		lst_symbol_print_64(t_symbol *head);
+void		lst_symbol_sort(t_symbol *start);
 
 uint64_t	reverse_64(uint8_t should, uint64_t num);
 uint32_t	reverse_32(uint8_t should, uint32_t num);

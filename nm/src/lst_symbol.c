@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:09 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 12:23:24 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:12:02 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,74 +50,6 @@ void lst_symbol_sort(t_symbol *start)
         }
         lptr = ptr1;
     }
-}
-
-// _NSHTTPCookieComment (indirect for _NSHTTPCookieComment)
-void		lst_symbol_print_64(t_symbol *head)
-{
-	lst_symbol_sort(head);
-	while (head)
-	{
-		if (head->symb_char != 'U')
-		{
-			if (head->symb_char == 'I')
-			{
-				ft_printf("%s %c %s (indirect for %s)\n", 
-					"                ",
-					head->symb_char,
-					head->symbol_name,
-					head->symbol_name);
-			}
-			else
-			{
-				ft_printf("%016lx %c %s\n", 
-					head->symb_value,
-					head->symb_char,
-					head->symbol_name);
-			}
-		}
-		else
-		{
-			ft_printf("%s %c %s\n", 
-					"                ",
-					head->symb_char,
-					head->symbol_name);
-
-		}
-		head = head->next;
-	}
-}
-
-void		lst_symbol_print_32(t_symbol *head)
-{
-	lst_symbol_sort(head);
-	while (head)
-	{
-		if (head->symb_char != 'U')
-		{
-			if (head->symb_char == 'I')
-			{
-				ft_printf("%s %c %s (indirect for %s)\n", 
-					"        ",
-					head->symb_char,
-					head->symbol_name,
-					head->symbol_name);
-			}
-			ft_printf("%08lx %c %s\n", 
-					head->symb_value,
-					head->symb_char,
-					head->symbol_name);
-		}
-		else
-		{
-			ft_printf("%s %c %s\n", 
-					"        ",
-					head->symb_char,
-					head->symbol_name);
-
-		}
-		head = head->next;
-	}
 }
 
 void		lst_symbol_free(t_symbol *head)
