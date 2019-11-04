@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 14:58:27 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:40:45 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int		parse_segment_32(t_infile *file, struct load_command *lc)
 	sections = (void *)sg + sizeof(struct segment_command);
 	while (nsects--)
 	{
-#ifdef DEBUG_SECTION
-		printf("added section : %s for segment : %s\n", ((struct section *)sections)->sectname, ((struct section *)sections)->segname);
-#endif
 		lst_section_append(&file->sections, lst_section_new(sections, id));
 		if (protect(file, (void *)sections + sizeof(struct section)) < 0)
 			return (0);
