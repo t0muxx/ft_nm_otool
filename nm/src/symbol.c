@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 15:00:23 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:04:10 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ void	parse_symtab_iter_64(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	strsize = reverse_32(file->type == IS_BE_64, file->symtab_command->strsize);
 	while (i < nsymb)
 	{
-		if (!((void *)(struct nlist_64 *)(sym_data + i)
-			> (void *)file->save + file->sz)
-		&& !(sym_data[i].n_type & N_STAB))
+		if (protect(file, (void *)(struct nlist_64 *)(sym_data + i)) == 0)
 		{
 			if (!(sym_data[i].n_type & N_STAB))
 			{
@@ -87,13 +85,10 @@ void	parse_symtab_iter_32(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	i = 0;
 	sym_data = (struct nlist *)sym_data_start;
 	strsize = reverse_32(file->type == IS_BE, file->symtab_command->strsize);
-//	printf("strzie = %u strtab : %p sym_data : %p\n", strsize, strtab, sym_data);
 	while (i < nsymb)
 	{
-		if (!((void *)(struct nlist *)(sym_data + i)
-				> (void *)file->save + file->sz))
+		if (protect(file, (void *)(struct nlist *)(sym_data + i)) == 0)
 		{
-//			printf("n_type = %#x\n", sym_data[i].n_type);
 			if (!(sym_data[i].n_type & N_STAB))
 			{
 				parse_symtab_add_sym(
