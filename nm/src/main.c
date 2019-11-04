@@ -6,14 +6,13 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 13:08:12 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:15:02 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
 /* TODO : MULTI ARGS
- * archive
  * moar tests
  * nm-otool-test/binary/ls_string_table_corr5 /!\
  * ppr or not ? nm-otool-test/fat/audiodevice

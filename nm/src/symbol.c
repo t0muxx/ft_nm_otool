@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 11:01:32 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:32:36 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	parse_symtab_add_sym(t_infile *file, void *sym,
 			file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_un.n_strx);
 		sym_value = reverse_64(file->type == IS_BE_64, ((struct nlist_64 *)sym)->n_value);
 	}
-	if ((void *)sym_name > (void *)file->save + file->sz 
+	if (protect(file, (void *)sym_name) < 0 
 		|| (void *)sym_name > (void *)strtab + strsize)
 	{
 		sym_name = "bad string index";
 		lst_symbol_append_nosort(&file->symbols, 
 		lst_symbol_new(sym, sym_name, protected_strlen(sym_name, file),sym_value));
-		return;
+		return ;
 	}
 	lst_symbol_append_nosort(&file->symbols, 
 	lst_symbol_new(sym, sym_name, protected_strlen(sym_name, file),sym_value));
@@ -64,9 +64,7 @@ void	parse_symtab_iter_64(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	strsize = reverse_32(file->type == IS_BE_64, file->symtab_command->strsize);
 	while (i < nsymb)
 	{
-		if (!((void *)(struct nlist_64 *)(sym_data + i)
-			> (void *)file->save + file->sz)
-		&& !(sym_data[i].n_type & N_STAB))
+		if (protect(file, (void *)(struct nlist_64 *)(sym_data + i)) > 0)
 		{
 			if (!(sym_data[i].n_type & N_STAB))
 			{
@@ -87,13 +85,10 @@ void	parse_symtab_iter_32(t_infile *file, void *sym_data_start, uint32_t nsymb, 
 	i = 0;
 	sym_data = (struct nlist *)sym_data_start;
 	strsize = reverse_32(file->type == IS_BE, file->symtab_command->strsize);
-//	printf("strzie = %u strtab : %p sym_data : %p\n", strsize, strtab, sym_data);
 	while (i < nsymb)
 	{
-		if (!((void *)(struct nlist *)(sym_data + i)
-				> (void *)file->save + file->sz))
+		if (protect(file, (void *)(struct nlist *)(sym_data + i)) > 0)
 		{
-//			printf("n_type = %#x\n", sym_data[i].n_type);
 			if (!(sym_data[i].n_type & N_STAB))
 			{
 				parse_symtab_add_sym(
@@ -109,20 +104,17 @@ int	parse_symtab(t_infile *file, struct symtab_command *st)
 	void			*strtab;
 	uint32_t		nsymb;
 
-//	printf("parse_sym start : \n");
-	if ((void *)st + sizeof(struct symtab_command) > (void *)file->start + file->sz)
+	if (protect(file, (void *)st + sizeof(struct symtab_command)) < 0)
 		return (0);
 	file->symtab_command = st;
 	strtab = (void *)file->start + reverse_32(
 			file->type == IS_BE || file->type == IS_BE_64, st->stroff);
 	nsymb = reverse_32(file->type == IS_BE || file->type == IS_BE_64,st->nsyms);
-//	printf("nsymb = %u\n", nsymb);
-	if ((void *) file->start
-		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->stroff)
-		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->strsize)
-		> (void *)file->save + file->sz)
+	if (protect(file, (void *)file->start
+	+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->stroff)
+	+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->strsize))
+		< 0)
 		return (-1);
-//	printf("parse_sym noerr : \n");
 	if (file->type == IS_32 || file->type == IS_BE)
 		parse_symtab_iter_32(file, (void *)file->start + reverse_32(file->type == IS_BE, st->symoff), nsymb, strtab);
 	if (file->type == IS_64 || file->type == IS_BE_64)

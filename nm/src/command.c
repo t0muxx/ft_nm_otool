@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 14:19:49 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:22:22 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int	parse_load_command(t_infile *infile, struct load_command *lc)
 
 	cmd_type = reverse_32(infile->type == IS_BE || infile->type == IS_BE_64,
 			lc->cmd);
-	if ((void *)lc + sizeof(uint32_t) > (void *)infile->save + infile->sz)
+	if (protect(infile, (void *)lc + sizeof(uint32_t)) < 0)	
 		return (-1);
-	// Need to reverse bits :
 	if (cmd_type == LC_SEGMENT || cmd_type == LC_SEGMENT_64)
 	{
 		if (parse_segment(infile, lc) < 0)
@@ -88,8 +87,8 @@ int	iter_load_command(t_infile *infile)
 	totalsize = 0;
 	while (n_lcmds)
 	{
-		if ((void *)lc + sizeof(((struct load_command *)lc)->cmdsize) >
-				(void *)infile->save + infile->sz)
+		if (protect(infile, 
+		(void *)lc + sizeof(((struct load_command *)lc)->cmdsize)) < 0)
 			return (error_gen("corrupted load commands"));
 		cmdsize = reverse_32(
 			infile->type == IS_BE || infile->type == IS_BE_64,
@@ -98,7 +97,7 @@ int	iter_load_command(t_infile *infile)
 			return (error_gen("corrupted load commands"));
 		if (parse_load_command(infile, (struct load_command *)lc) < 0)
 			return (error_gen("corrupted load commands"));
-		if ((void *)lc + sizeof(uint32_t) > (void *)infile->start + infile->sz)
+		if (protect(infile, (void *)lc + sizeof(uint32_t)) < 0)
 			return (error_gen("corrupted load commands"));
 		lc = (void *)lc + cmdsize;
 		totalsize += cmdsize;
