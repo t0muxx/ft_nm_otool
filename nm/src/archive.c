@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 15:30:04 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:22:28 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	archive_fw_symdef(t_infile *file, struct ar_hdr *ar_header)
 {
-	char *name;
-	int ret;
+	char	*name;
+	int		ret;
 
 	ret = 0;
 	name = NULL;
@@ -32,11 +32,11 @@ void	archive_fw_symdef(t_infile *file, struct ar_hdr *ar_header)
 	}
 }
 
-int	parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
+int		parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 {
-	unsigned long magic_bytes;
-	int		offset;
-	
+	unsigned long	magic_bytes;
+	int				offset;
+
 	offset = 0;
 	magic_bytes = 0;
 	ar_header = file->start;
@@ -46,7 +46,7 @@ int	parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 	file->start = (void *)file->start + sizeof(struct ar_hdr) + offset;
 	magic_bytes = *(uint32_t *)((void *)file->start);
 	if (!(!ft_strncmp((char *)file->start, ARMAG, SARMAG)
-	|| magic_bytes == FAT_MAGIC || magic_bytes == FAT_MAGIC_64 || 
+	|| magic_bytes == FAT_MAGIC || magic_bytes == FAT_MAGIC_64 ||
 	magic_bytes == FAT_CIGAM || magic_bytes == FAT_CIGAM_64))
 	{
 		print_archive_member(file, ar_header);
@@ -59,9 +59,8 @@ int	parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 	return (0);
 }
 
-int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
+int		parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 {
-
 	if (protect(file, (void *)ar_header + sizeof(struct ar_hdr)
 	+ ft_atoi(ar_header->ar_size)) < 0)
 		return (-1);
@@ -75,11 +74,10 @@ int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 	return (0);
 }
 
-int	process_archive(t_infile *file)
+int		process_archive(t_infile *file)
 {
 	struct ar_hdr *ar_header;
 
-//	ft_putstr("process_archive : \n");
 	if (protect(file, (void *)file->start + SARMAG) < 0)
 		return (error_gen("corrupted header"));
 	if (ft_strncmp((char *)file->start, ARMAG, SARMAG))
