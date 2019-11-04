@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:48:07 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 11:01:32 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:00:23 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,17 @@ int	parse_symtab(t_infile *file, struct symtab_command *st)
 	void			*strtab;
 	uint32_t		nsymb;
 
-//	printf("parse_sym start : \n");
-	if ((void *)st + sizeof(struct symtab_command) > (void *)file->start + file->sz)
+	if (protect(file, (void *)st + sizeof(struct symtab_command)) < 0)
 		return (0);
 	file->symtab_command = st;
 	strtab = (void *)file->start + reverse_32(
 			file->type == IS_BE || file->type == IS_BE_64, st->stroff);
 	nsymb = reverse_32(file->type == IS_BE || file->type == IS_BE_64,st->nsyms);
-//	printf("nsymb = %u\n", nsymb);
-	if ((void *) file->start
-		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->stroff)
-		+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->strsize)
-		> (void *)file->save + file->sz)
+	if (protect(file, (void *) file->start
+	+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->stroff)
+	+ reverse_32(file->type == IS_BE || file->type == IS_BE_64, st->strsize))
+	> 0)
 		return (-1);
-//	printf("parse_sym noerr : \n");
 	if (file->type == IS_32 || file->type == IS_BE)
 		parse_symtab_iter_32(file, (void *)file->start + reverse_32(file->type == IS_BE, st->symoff), nsymb, strtab);
 	if (file->type == IS_64 || file->type == IS_BE_64)
