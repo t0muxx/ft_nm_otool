@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 13:05:17 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:10:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 		if (!(!ft_strncmp((char *)file->start, ARMAG, SARMAG) || magic_bytes == FAT_MAGIC || magic_bytes == FAT_MAGIC_64 || magic_bytes == FAT_CIGAM || magic_bytes == FAT_CIGAM_64))
 		{
 			print_archive_member(file, ar_header);
-			process_macho(file);
+			if (process_macho(file) < 0)
+				return (-1);
 		}
 			file->start = (void *)file->start + ft_atoi(ar_header->ar_size) - offset;
 			offset = get_str_offset_archive((struct ar_hdr *)((void *)file->start + sizeof(struct ar_hdr)));
