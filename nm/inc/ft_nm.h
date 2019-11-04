@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:17:41 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:55:30 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <sys/mman.h>
 
 # ifdef __linux__
-#	include "../mach_headers/custom.h"
+#  include "../mach_headers/custom.h"
 # else
-#	include <mach-o/loader.h>
-#	include <mach-o/nlist.h>
-#	include <mach/machine.h>
-#	include <mach-o/fat.h>
-#	include <ar.h>
-#	include <ranlib.h>
+#  include <mach-o/loader.h>
+#  include <mach-o/nlist.h>
+#  include <mach/machine.h>
+#  include <mach-o/fat.h>
+#  include <ar.h>
+#  include <ranlib.h>
 # endif
 
 # define IS_32 1
@@ -58,22 +58,23 @@ typedef struct	s_symbol
 
 typedef	struct	s_infile
 {
-	char		*filename;
-	uint8_t		type;
-	void		*start;
-	void		*save;
-	void		*current;
-	size_t		sz;
-	uint64_t	ar_sz;
-	void		*mac_header;
+	char					*filename;
+	uint8_t					type;
+	void					*start;
+	void					*save;
+	void					*current;
+	size_t					sz;
+	uint64_t				ar_sz;
+	void					*mac_header;
 	struct symtab_command	*symtab_command;
-	t_section	*sections;
-	t_symbol	*symbols;
+	t_section				*sections;
+	t_symbol				*symbols;
 
 }				t_infile;
 
 int			protect(t_infile *file, void *ptr);
 int			error_gen(char *str);
+size_t		protected_strlen(char *str, t_infile *file);
 
 int			process_archive(t_infile *file);
 int			process_fat(t_infile *file);
@@ -108,7 +109,6 @@ void		lst_symbol_sort(t_symbol *start);
 uint64_t	reverse_64(uint8_t should, uint64_t num);
 uint32_t	reverse_32(uint8_t should, uint32_t num);
 uint8_t		reverse_8(uint8_t should, uint8_t num);
-
 
 int			print_archive_member(t_infile *file, struct ar_hdr *ar_header);
 int			get_str_offset_archive(struct ar_hdr *ar_header);
