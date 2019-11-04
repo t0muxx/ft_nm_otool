@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 12:54:34 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:08:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * moar tests
  * nm-otool-test/binary/ls_string_table_corr5 /!\
  * ppr or not ? nm-otool-test/fat/audiodevice
+ * to check nm-otool-test/lib/libswiftCore.dylib.out
  * */
 
 int	process_normal(t_infile *infile)
