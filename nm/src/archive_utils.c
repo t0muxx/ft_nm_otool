@@ -6,13 +6,13 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:19:30 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 15:20:13 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:23:19 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nm.h"
 
-void putstr_member_name(char *str, size_t len)
+void	putstr_member_name(char *str, size_t len)
 {
 	size_t i;
 
@@ -25,7 +25,7 @@ void putstr_member_name(char *str, size_t len)
 	}
 }
 
-int	get_str_offset_archive(struct ar_hdr *ar_header)
+int		get_str_offset_archive(struct ar_hdr *ar_header)
 {
 	int	ret;
 
@@ -37,10 +37,10 @@ int	get_str_offset_archive(struct ar_hdr *ar_header)
 	return (ret);
 }
 
-int	print_archive_member(t_infile *file, struct ar_hdr *ar_header)
+int		print_archive_member(t_infile *file, struct ar_hdr *ar_header)
 {
-	char *name;
-	int ret;
+	char	*name;
+	int		ret;
 
 	ret = 0;
 	name = NULL;
