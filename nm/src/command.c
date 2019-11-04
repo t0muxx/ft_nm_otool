@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 14:50:19 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:54:06 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,24 @@ int	check_totalsize_load_command(t_infile *file, uint32_t totalsize)
 	return (0);
 }
 
+int	iter_load_command_work(t_infile *infile, void *lc,
+		uint32_t *cmdsize, uint32_t totalsize)
+{
+	if (protect(infile, (void *)lc
+	+ sizeof(((struct load_command *)lc)->cmdsize)) < 0)
+		return (error_gen("corrupted load commands"));
+	*cmdsize = reverse_32(
+		infile->type == IS_BE || infile->type == IS_BE_64,
+		 ((struct load_command *)lc)->cmdsize);
+	if (check_totalsize_load_command(infile, totalsize) < 0)
+		return (error_gen("corrupted load commands"));
+	if (parse_load_command(infile, (struct load_command *)lc) < 0)
+		return (error_gen("corrupted load commands"));
+	if (protect(infile, (void *)lc + sizeof(uint32_t)) < 0)
+		return (error_gen("corrupted load commands"));
+	return (0);
+}
+
 int	iter_load_command(t_infile *infile)
 {
 	uint32_t		 	n_lcmds;
@@ -87,17 +105,8 @@ int	iter_load_command(t_infile *infile)
 	totalsize = 0;
 	while (n_lcmds)
 	{
-		if (protect(infile, (void *)lc + sizeof(((struct load_command *)lc)->cmdsize)) < 0)
-			return (error_gen("corrupted load commands"));
-		cmdsize = reverse_32(
-			infile->type == IS_BE || infile->type == IS_BE_64,
-			 ((struct load_command *)lc)->cmdsize);
-		if (check_totalsize_load_command(infile, totalsize) < 0)
-			return (error_gen("corrupted load commands"));
-		if (parse_load_command(infile, (struct load_command *)lc) < 0)
-			return (error_gen("corrupted load commands"));
-		if (protect(infile, (void *)lc + sizeof(uint32_t)) < 0)
-			return (error_gen("corrupted load commands"));
+		if (iter_load_command_work(infile, lc, &cmdsize, totalsize) < 0)
+			return (-1);
 		lc = (void *)lc + cmdsize;
 		totalsize += cmdsize;
 		n_lcmds--;
