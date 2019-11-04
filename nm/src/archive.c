@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 12:46:59 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 13:02:59 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 	while ((void *)file->start < (void *)file->save + file->ar_sz)
 	{
 		ar_header = file->start;
+		if (ft_strncmp(ar_header->ar_fmag, "`\n", 2))
+			return (error_gen("malformed archive header"));
 		offset = get_str_offset_archive(ar_header);
 		file->start = (void *)file->start + sizeof(struct ar_hdr) + offset;
 		magic_bytes = *(uint32_t *)((void *)file->start);
