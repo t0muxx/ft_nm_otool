@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 13:46:05 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 15:50:01 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,72 +106,22 @@ int	process_fat_32(t_infile *file)
 	return (0);
 }
 
-int	search_cputype_x64(t_infile *file, unsigned long magic_bytes)
-{
-	struct fat_header	*fat_header;
-	uint32_t			i;
-	uint64_t			offset;
-	void				*fat_arch;
-	uint64_t			ar_sz;
-
-	ar_sz = 0;
-	i = 0;
-	fat_header = file->start;
-	fat_arch = file->start + sizeof(struct fat_header);
-	while (i < reverse_32(1, fat_header->nfat_arch))
-	{
-		if (magic_bytes == FAT_MAGIC || magic_bytes == FAT_CIGAM)
-		{
-			if ((void *)fat_arch + sizeof(struct fat_arch) > (void *)file->start + file->sz)
-				return (error_gen("corrupted far_arch"));
-			offset = reverse_32(1, ((struct fat_arch *)fat_arch)->offset);
-			ar_sz = reverse_32(1, ((struct fat_arch *)fat_arch)->size);
-		}
-		else if (magic_bytes == FAT_MAGIC_64 || magic_bytes == FAT_CIGAM_64)
-		{
-			if ((void *)fat_arch + sizeof(struct fat_arch_64) > (void *)file->start + file->sz)
-				return (error_gen("corrupted far_arch"));
-			offset = reverse_64(1, ((struct fat_arch_64 *)fat_arch)->offset);
-			ar_sz = reverse_64(1, ((struct fat_arch_64 *)fat_arch)->size);
-		}
-		if (offset <= 0)
-			return(error_gen("fat offset <= 0"));
-		if (reverse_32(1, ((struct fat_arch *)fat_arch)->cputype) == CPU_TYPE_X86_64)
-		{
-			file->ar_sz = ar_sz;
-			file->start = (void *)file->start + offset;
-			return (1);
-		}
-		if (magic_bytes == FAT_MAGIC || magic_bytes == FAT_CIGAM)
-			fat_arch = (void *)fat_arch + sizeof(struct fat_arch);
-		else if (magic_bytes == FAT_MAGIC_64 || magic_bytes == FAT_CIGAM_64)
-			fat_arch = (void *)fat_arch + sizeof(struct fat_arch_64);
-		i++;
-	}
-	return (0);
-}
-
 int	process_fat(t_infile *file)
 {
 	unsigned long	magic_bytes;
 
 	magic_bytes = 0;
-//	ft_putstr("process_fat : \n");
-	if ((void *)file->start + sizeof(unsigned long)
-			> (void *)file->start + file->sz)
+	if (protect(file, (void *)file->start + sizeof(unsigned long)) < 0)
 		return (error_gen("corrupted fat header 0"));
 	magic_bytes = *(uint32_t *)file->start;
-//	printf("magic_bytes == %lx\n", magic_bytes);
-	if (magic_bytes != FAT_MAGIC && magic_bytes != FAT_MAGIC_64 && magic_bytes != FAT_CIGAM && magic_bytes != FAT_CIGAM_64)
+	if (magic_bytes != FAT_MAGIC && magic_bytes != FAT_MAGIC_64
+	&& magic_bytes != FAT_CIGAM && magic_bytes != FAT_CIGAM_64)
 		return (1);
-	if ((void *)file->start + sizeof(struct fat_header) + sizeof(cpu_type_t)
-	 > (void *)file->start + file->sz)
+	if (protect(file, (void *)file->start
+	+ sizeof(struct fat_header) + sizeof(cpu_type_t)) < 0)
 		return (error_gen("corrupted fat header 1"));
 	if (search_cputype_x64(file, magic_bytes) > 0)
-	{
-//		ft_putstr("found x64\n");
 		return (process_macho(file));
-	}
 	if (magic_bytes == FAT_MAGIC || magic_bytes == FAT_CIGAM)
 		return (process_fat_32(file));
 	if (magic_bytes == FAT_MAGIC_64 || magic_bytes == FAT_CIGAM_64)

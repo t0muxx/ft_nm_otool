@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/11/04 15:21:30 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/11/04 15:50:13 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS = 	infile.c \
 		symbol_resolve.c \
 		reverse_bytes.c \
 		fat.c \
+		fat_utils.c \
 		archive.c \
 		archive_utils.c \
 		protect.c \
