@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/03 18:57:55 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 12:06:22 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 	(*infile)->current = (*infile)->start;
 	(*infile)->save = (*infile)->start;
 	(*infile)->sz = 0;
+	(*infile)->ar_sz = 0;
 	(*infile)->type = 0;
 	(*infile)->mac_header = NULL;
 	(*infile)->sections = NULL;
@@ -57,12 +58,14 @@ t_infile	*process_infile(char *path)
 		return (process_infile_error(fd, NULL, path, "can't stat"));
 	if (!(infile = (t_infile *)malloc(sizeof(t_infile))))
 		return (process_infile_error(fd, NULL, path, "can't malloc"));
-	if (!(infile->filename = (char *)malloc(ft_strlen(path))))
+	if (!(infile->filename = (char *)malloc(ft_strlen(path)+1)))
 		return (process_infile_error(fd, NULL, path, "can't malloc"));
 	ft_strcpy(infile->filename, path);
+	infile->filename[ft_strlen(path)] = '\0';
 	if (process_infile_mmap(&infile, buf, fd) < 0)
 		return (process_infile_error(fd, infile, path, "can't mmap"));
 	infile->sz = buf.st_size;
+	infile->ar_sz = infile->sz;
 	close(fd);
 	return (infile);
 }

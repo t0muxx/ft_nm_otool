@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/03 18:27:07 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 09:29:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #	include <mach-o/nlist.h>
 #	include <mach/machine.h>
 #	include <mach-o/fat.h>
+#	include <ar.h>
+#	include <ranlib.h>
 # endif
 
 # define IS_32 1
@@ -62,6 +64,7 @@ typedef	struct	s_infile
 	void		*save;
 	void		*current;
 	size_t		sz;
+	uint64_t	ar_sz;
 	void		*mac_header;
 	struct symtab_command	*symtab_command;
 	t_section	*sections;

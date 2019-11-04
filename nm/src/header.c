@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/10/31 12:03:05 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 12:36:03 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	process_header(t_infile *infile)
 		infile->type = IS_BE;
 	else if (magic_bytes == MH_CIGAM_64)
 		infile->type = IS_BE_64;
-	else 
-		return (error_gen("unknown magic byte"));
+	else
+		return (-1);
 #ifdef DEBUG_HEADER
 	ft_printf("|DEBUG| -> type = %d\n", infile->type);
 #endif

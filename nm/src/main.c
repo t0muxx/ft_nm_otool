@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/03 18:29:40 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 12:46:40 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 /* TODO : MULTI ARGS
  * archive
  * moar tests
+ * nm-otool-test/binary/ls_string_table_corr5 /!\
  * */
 
-int	process_macho(t_infile *infile)
+int	process_normal(t_infile *infile)
 {
+//	ft_putstr("process_normal : \n");
 	if (process_header(infile) < 0)
 		return error_gen("corrupted fat header");
 	if (iter_load_command(infile) < 0)
@@ -38,6 +40,32 @@ int	process_macho(t_infile *infile)
 	lst_section_free(infile->sections);
 	infile->sections = NULL;
 	return (0);
+
+}
+
+int	process_macho(t_infile *infile)
+{
+//	ft_putstr("process_macho : \n");
+	int (*func_array[3])(t_infile *file);
+	int ret;
+	int i;
+
+	i = 0;
+	ret = 0;
+	func_array[0] = process_archive;
+	func_array[1] = process_fat;
+	func_array[2] = process_normal;
+	while (i < 3)
+	{
+		ret = (*func_array[i])(infile);
+	//	printf("ret == %d et i == %d\n", ret, i);
+		if (ret < 0)
+			return (-1);
+		else if (ret == 0)
+			return (0);
+		i++;
+	}
+	return (0);
 }
 
 int	process_args(char *file)
@@ -51,23 +79,7 @@ int	process_args(char *file)
 	{
 		return (-1);
 	}
-	if ((ret = process_archive(infile)) < 0)
-		return (-1);
-	else if (ret == 0)
-		return (0);
-	else
-	{
-		if (process_fat(infile) < 0)
-		{
-			munmap(infile->start, infile->sz);
-			free(infile->filename);
-			free(infile);
-			return (-1);
-		}
-		munmap(infile->save, infile->sz);
-		free(infile->filename);
-		free(infile);
-	}
+	process_macho(infile);
 	return (0);
 }
 
