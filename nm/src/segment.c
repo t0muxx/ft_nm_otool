@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 14:56:06 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/04 14:58:27 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int		parse_segment_64(t_infile *file, struct load_command *lc)
 	while (nsects--)
 	{
 		lst_section_append(&file->sections, lst_section_new(sections, id));
-		if ((void *)sections + sizeof(struct section_64) 
-				> (void *)file->start + file->sz)
+		if (protect(file, (void *)sections + sizeof(struct section_64)) < 0)
 			return (0);
 		sections = (void *)sections + sizeof(struct section_64);
 		id++;
@@ -52,8 +51,7 @@ int		parse_segment_32(t_infile *file, struct load_command *lc)
 		printf("added section : %s for segment : %s\n", ((struct section *)sections)->sectname, ((struct section *)sections)->segname);
 #endif
 		lst_section_append(&file->sections, lst_section_new(sections, id));
-		if ((void *)sections + sizeof(struct section) 
-				> (void *)file->start + file->sz)
+		if (protect(file, (void *)sections + sizeof(struct section)) < 0)
 			return (0);
 		sections = (void *)sections + sizeof(struct section);
 		id++;
