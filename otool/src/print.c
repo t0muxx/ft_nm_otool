@@ -6,11 +6,20 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:10:27 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 17:03:46 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:12:24 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_otool.h"
+
+void	print_file_type(t_infile *file, char *type)
+{
+	if (file->type_printed == 0)
+	{
+		ft_printf("%s : %s\n", type, file->filename);
+		file->type_printed = 1;
+	}
+}
 
 int		print_text_bytes(t_infile *file, uint8_t *current, uint32_t print)
 {
@@ -35,6 +44,8 @@ int		print_text_bytes(t_infile *file, uint8_t *current, uint32_t print)
 		i++;
 		byte++;
 		print--;
+		if (protect(file, (void *)byte) < 0)
+			return (-1);
 	}
 	return (0);
 }
@@ -51,7 +62,7 @@ void	print_text_32(t_infile *file)
 	while (file->text_sz > 0)
 	{
 		print = 16;
-		ft_printf("%08lx:    ", file->text_addr);
+		ft_printf("%08lx\t", file->text_addr);
 		if (file->text_sz - i < 16)
 			print = file->text_sz - i;
 		if (print_text_bytes(file, current, print) < 0)
@@ -60,8 +71,9 @@ void	print_text_32(t_infile *file)
 		current = (void *)current + 16;
 		file->text_addr += 16;
 		ft_putendl("");
+		if (protect(file, (void *)current) < 0)
+			return ;
 	}
-
 }
 
 void	print_text_64(t_infile *file)
@@ -76,7 +88,7 @@ void	print_text_64(t_infile *file)
 	while (i < file->text_sz)
 	{
 		print = 16;
-		ft_printf("%016lx:    ", file->text_addr);
+		ft_printf("%016lx\t", file->text_addr);
 		if (file->text_sz - i < 16)
 			print = file->text_sz - i;
 		if (print_text_bytes(file, current, print) < 0)
@@ -85,6 +97,8 @@ void	print_text_64(t_infile *file)
 		current = (void *)current + 16;
 		file->text_addr += 16;
 		ft_putendl("");
+		if (protect(file, (void *)current) < 0)
+			return ;
 	}
 
 }

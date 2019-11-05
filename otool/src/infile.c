@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 16:25:35 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:11:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 	(*infile)->text_sz = 0;
 	(*infile)->text_offs = 0;
 	(*infile)->text_addr = 0;
+	(*infile)->type_printed = 0;
 	return (0);
 }
 
