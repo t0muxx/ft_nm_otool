@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 10:28:47 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 15:10:24 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	main(int argc, char **argv)
 	{
 		while (i < argc)
 		{
+			if (argc > 2)
+				ft_printf("\n%s:\n", argv[i]);
 			process_args(argv[i]);
 			i++;
 		}

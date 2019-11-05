@@ -1,6 +1,6 @@
 while true
 do
-	radamsa sample_2 > fuzzed
+	radamsa sample_3 > fuzzed
 	../../nm/ft_nm fuzzed
-	test $? -gt 127 && break
+	test $? -gt 0 && break
 done
