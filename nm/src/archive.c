@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 10:16:05 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:30:33 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 	|| magic_bytes == FAT_MAGIC || magic_bytes == FAT_MAGIC_64 ||
 	magic_bytes == FAT_CIGAM || magic_bytes == FAT_CIGAM_64))
 	{
-		file->can_munmap = 0;
 		print_archive_member(file, ar_header);
 		if (process_macho(file) < 0)
 			return (-1);
@@ -72,7 +71,6 @@ int		parse_archive_member(t_infile *file, struct ar_hdr *ar_header)
 		if (parse_archive_member_work(file, ar_header) < 0)
 			return (-1);
 	}
-	file->can_munmap = 1;
 	return (0);
 }
 

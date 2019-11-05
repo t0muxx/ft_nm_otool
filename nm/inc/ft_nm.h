@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 10:13:48 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:30:26 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ typedef	struct	s_infile
 	struct symtab_command	*symtab_command;
 	t_section				*sections;
 	t_symbol				*symbols;
-	uint8_t					can_munmap;
 
 }				t_infile;
 
 int			protect(t_infile *file, void *ptr);
 int			error_gen(char *str);
 size_t		protected_strlen(char *str, t_infile *file);
-void	protected_munmap(t_infile *file);
+void		protected_free(t_infile *file);
 
 int			process_archive(t_infile *file);
 int			process_fat(t_infile *file);
