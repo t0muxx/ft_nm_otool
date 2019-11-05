@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:43:17 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 16:24:58 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,6 @@
 //# define DEBUG_SEGMENT
 //# define DEBUG_SECTION
 
-typedef	struct	s_section
-{
-	void				*section;
-	int					id;
-	struct s_section	*next;
-
-}				t_section;
-
-typedef struct	s_symbol
-{
-	void				*symbol;
-	char				*symbol_name;
-	char				symb_char;
-	uint64_t			symb_value;
-	struct s_symbol		*next;
-
-}				t_symbol;
-
 typedef	struct	s_infile
 {
 	char					*filename;
@@ -63,14 +45,16 @@ typedef	struct	s_infile
 	void					*start;
 	void					*save;
 	void					*current;
+	uint64_t				text_sz;
+	uint64_t				text_offs;
+	uint64_t				text_addr;
 	size_t					sz;
 	uint64_t				ar_sz;
 	void					*mac_header;
-	struct symtab_command	*symtab_command;
-	t_section				*sections;
-	t_symbol				*symbols;
 
 }				t_infile;
+
+void	print_text(t_infile *file);
 
 int			protect(t_infile *file, void *ptr);
 int			error_gen(char *str);
@@ -88,24 +72,6 @@ int			iter_load_command(t_infile *infile);
 int			parse_segment(t_infile *file, struct load_command *lc);
 int			parse_symtab(t_infile *file, struct symtab_command *symtab_command);
 void		symbol_resolve(t_infile *infile);
-/*
-** t_section list :
-*/
-void		lst_section_append(t_section **head, t_section *new);
-t_section	*lst_section_new(void *ptr, int id);
-void		lst_section_free(t_section *head);
-
-/*
-** t_symbol list :
-*/
-void		lst_symbol_append(t_symbol **head, t_symbol *new);
-void		lst_symbol_append_nosort(t_symbol **head, t_symbol *new);
-t_symbol	*lst_symbol_new(void *ptr, char *str,
-								size_t str_len, uint64_t val);
-void		lst_symbol_free(t_symbol *head);
-void		lst_symbol_print_32(t_symbol *head);
-void		lst_symbol_print_64(t_symbol *head);
-void		lst_symbol_sort(t_symbol *start);
 
 uint64_t	reverse_64(uint8_t should, uint64_t num);
 uint32_t	reverse_32(uint8_t should, uint32_t num);

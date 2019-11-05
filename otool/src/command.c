@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:55:10 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:44:14 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 16:21:27 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 int			parse_load_command(t_infile *infile, struct load_command *lc)
 {
-	uint32_t cmd_type;
+	uint32_t	cmd_type;
+	int			ret;
 
+	ret = 0;
 	cmd_type = reverse_32(infile->type == IS_BE || infile->type == IS_BE_64,
 			lc->cmd);
 	if (protect(infile, (void *)lc + sizeof(uint32_t)) < 0)
 		return (-1);
 	if (cmd_type == LC_SEGMENT || cmd_type == LC_SEGMENT_64)
 	{
-		if (parse_segment(infile, lc) < 0)
+		if ((ret = parse_segment(infile, lc)) < 0)
 			return (-1);
-	}
-	else if (cmd_type == LC_SYMTAB)
-	{
-		if (parse_symtab(infile, (struct symtab_command *)lc) < 0)
-			return (-1);
+		else if (ret == 1)
+			return (1);
 	}
 	return (0);
 }

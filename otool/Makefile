@@ -6,7 +6,7 @@
 #    By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:50:56 by tmaraval          #+#    #+#              #
-#    Updated: 2019/11/05 15:45:48 by tmaraval         ###   ########.fr        #
+#    Updated: 2019/11/05 15:52:56 by tmaraval         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,6 @@ SRCS = 	infile.c \
 		error.c \
 		header.c \
 		segment.c \
-		lst_section.c \
-		lst_symbol.c \
-		symbol.c \
-		symbol_resolve.c \
 		reverse_bytes.c \
 		fat.c \
 		fat_utils.c \

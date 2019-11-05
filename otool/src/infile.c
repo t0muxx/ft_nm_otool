@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:03:22 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:44:36 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 16:25:35 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		*process_infile_error(int fd, t_infile *infile,
 	}
 	if (fd)
 		close(fd);
-	ft_putstr_fd("ft_nm : ", 2);
+	ft_putstr_fd("ft_otool : ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(" ", 2);
 	ft_putendl_fd(path, 2);
@@ -41,8 +41,9 @@ int			process_infile_mmap(t_infile **infile, struct stat buf, int fd)
 	(*infile)->ar_sz = 0;
 	(*infile)->type = 0;
 	(*infile)->mac_header = NULL;
-	(*infile)->sections = NULL;
-	(*infile)->symbols = NULL;
+	(*infile)->text_sz = 0;
+	(*infile)->text_offs = 0;
+	(*infile)->text_addr = 0;
 	return (0);
 }
 

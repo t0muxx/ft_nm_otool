@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 09:48:56 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:44:18 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 15:48:13 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		error_gen(char *str)
 {
-	ft_putstr_fd("ft_nm : ", 2);
+	ft_putstr_fd("ft_otool : ", 2);
 	ft_putendl_fd(str, 2);
 	return (-1);
 }
