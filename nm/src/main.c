@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 10:16:24 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:21:26 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	process_normal(t_infile *infile)
 	{
 		protected_munmap(infile);	
 		lst_section_free(infile->sections);
+		infile->sections = NULL;
 		lst_symbol_free(infile->symbols);
+		infile->symbols = NULL;
 		return (-1);
 	}
 	symbol_resolve(infile);
