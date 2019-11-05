@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 09:48:56 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:49:02 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:10:44 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,12 @@ size_t	protected_strlen(char *str, t_infile *file)
 	while (((void *)str + i < (void *)file->save + file->sz) && str[i])
 		i++;
 	return (i);
+}
+
+void	protected_munmap(t_infile *file)
+{
+	if (file->can_munmap)
+	{
+		munmap(file->save, file->sz);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:27:57 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:16:13 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	process_fat_64_work(t_infile *file, void *save_start,
 		return (error_gen("fat offset <= 0"));
 	file->start = (void *)file->start + reverse_64(1, fat_arch[i].offset);
 	fat_print_arch(file, fat_arch[i].cputype, fat_arch[i].cpusubtype);
+	file->can_munmap = 0;
 	process_macho(file);
 	return (0);
 }
@@ -53,6 +54,7 @@ int	process_fat_64(t_infile *file)
 			return (error_gen("corrupted fat arch"));
 		i++;
 	}
+	file->can_munmap = 1;
 	return (0);
 }
 
@@ -68,6 +70,7 @@ int	process_fat_32_work(t_infile *file, void *save_start,
 		return (error_gen("fat offset <= 0"));
 	file->start = (void *)file->start + reverse_32(1, fat_arch[i].offset);
 	fat_print_arch(file, fat_arch[i].cputype, fat_arch[i].cpusubtype);
+	file->can_munmap = 0;
 	process_macho(file);
 	return (0);
 }
@@ -80,6 +83,7 @@ int	process_fat_32(t_infile *file)
 	void				*save_start;
 
 	save_start = file->start;
+//	ft_putstr("process_fat\n");
 	i = 0;
 	if (protect(file, (void *)file->start
 		+ sizeof(struct fat_header) + sizeof(struct fat_arch)) < 0)
@@ -96,6 +100,7 @@ int	process_fat_32(t_infile *file)
 			return (error_gen("corrupted fat arch"));
 		i++;
 	}
+	file->can_munmap = 1;
 	return (0);
 }
 

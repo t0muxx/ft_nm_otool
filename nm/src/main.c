@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:36:00 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/05 10:16:24 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 
 int	process_normal(t_infile *infile)
 {
+//	ft_putstr("process_normal\n");
 	if (process_header(infile) < 0)
 		return (error_gen("corrupted fat header"));
 	if (iter_load_command(infile) < 0)
 	{
-		munmap(infile->start, infile->sz);
+		protected_munmap(infile);	
 		lst_section_free(infile->sections);
 		lst_symbol_free(infile->symbols);
 		return (-1);
@@ -50,6 +51,7 @@ int	process_macho(t_infile *infile)
 
 	i = 0;
 	ret = 0;
+//	ft_putstr("process_macho\n");
 	func_array[0] = process_archive;
 	func_array[1] = process_fat;
 	func_array[2] = process_normal;
@@ -57,11 +59,18 @@ int	process_macho(t_infile *infile)
 	{
 		ret = (*func_array[i])(infile);
 		if (ret < 0)
+		{
+			protected_munmap(infile);	
 			return (-1);
+		}
 		else if (ret == 0)
+		{
+			protected_munmap(infile);	
 			return (0);
+		}
 		i++;
 	}
+	protected_munmap(infile);	
 	return (0);
 }
 
