@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:48:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:44:27 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 09:42:32 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	fat_print_arch(t_infile *file, cpu_type_t cputype,
 	cputype = reverse_32(1, cputype);
 	cpusubtype = reverse_32(1, cpusubtype);
 	if (cputype == CPU_TYPE_I386)
-		ft_printf("\n%s (for architecture i386):\n", file->filename);
+		ft_printf("\n%s (architecture i386):\n", file->filename);
 	else if (cputype == CPU_TYPE_POWERPC)
-		ft_printf("\n%s (for architecture ):\n", file->filename);
+		ft_printf("\n%s (architecture ):\n", file->filename);
 	else if (cputype == CPU_TYPE_X86_64)
-		ft_printf("\n%s (for architecture x86_64):\n", file->filename);
+		ft_printf("\n%s (architecture x86_64):\n", file->filename);
 	else if (cputype == CPU_TYPE_ARM64)
-		ft_printf("\n%s (for architecture arm64):\n", file->filename);
+		ft_printf("\n%s (architecture arm64):\n", file->filename);
 	else if (cputype == CPU_TYPE_ARM)
 	{
 		if (cpusubtype == CPU_SUBTYPE_ARM_V7)
-			ft_printf("\n%s (for architecture armv7):\n", file->filename);
+			ft_printf("\n%s (architecture armv7):\n", file->filename);
 		else if (cpusubtype == CPU_SUBTYPE_ARM_V7S)
-			ft_printf("\n%s (for architecture armv7s):\n", file->filename);
+			ft_printf("\n%s (architecture armv7s):\n", file->filename);
 	}
 }
 

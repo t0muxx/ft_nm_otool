@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:10:27 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/06 08:55:44 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 09:31:12 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,17 @@ int		print_text_bytes(t_infile *file, uint8_t *current, uint32_t print)
 	byte = current;
 	while (i < 16 && print)
 	{
-		nb = reverse_8(file->type == IS_BE || file->type == IS_BE_64, 
-				*byte) / 16;
+		nb = *byte / 16;
 		ft_putchar(base[nb]);
-		nb = reverse_8(file->type == IS_BE || file->type == IS_BE_64, 
-				*byte) % 16;
+		nb = *byte % 16;
 		ft_putchar(base[nb]);
-		ft_putstr(" ");
+		if (file->type != IS_BE)
+			ft_putstr(" ");
+		else
+		{
+			if ((i+1) % 4 == 0)
+				ft_putstr(" ");
+		}
 		i++;
 		byte++;
 		print--;
