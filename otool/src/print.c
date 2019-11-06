@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:10:27 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/06 08:47:37 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 08:55:44 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_text_32(t_infile *file)
 
 	i = 0;
 	current = (uint8_t *)file->start + file->text_offs;
-	ft_putstr("(__TEXT,__text) section\n");
+	ft_putstr("Contents of (__TEXT,__text) section\n");
 	while (i < file->text_sz)
 	{
 		print = 16;
@@ -87,7 +87,7 @@ void	print_text_64(t_infile *file)
 
 	i = 0;
 	current = (uint8_t *)file->start + file->text_offs;
-	ft_putstr("(__TEXT,__text) section\n");
+	ft_putstr("Contents of (__TEXT,__text) section\n");
 	while (i < file->text_sz)
 	{
 		print = 16;
