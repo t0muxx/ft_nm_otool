@@ -1,5 +1,5 @@
 #!/bin/zsh
-rm errftnm errnm 
+rm errftotool errotool 
 for file in $@ $1
 do
 	echo "diff on $file"
@@ -10,9 +10,15 @@ do
 		echo "err by nm"
 	else
 		echo $file >> errftnm
-		cat $dir/nm_out/$filename.otool_out > resotool 2>> errotool
+		cat $dir/otool_out/$filename.otool_out > resotool 2>> errotool
 		../otool/ft_otool $file > resftotool 2>> errftotool
-		diff resotool resftotool
+		colordiff -u resotool resftotool 
+		if [ $? -eq 1 ]
+		then
+			echo "[!] output from nm and ft_nm differ."
+			read
+			#exit
+		fi
+
 	fi
 done
-rm resotool resftotool
