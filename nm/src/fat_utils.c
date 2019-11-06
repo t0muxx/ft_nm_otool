@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:48:28 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 09:51:36 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 12:43:20 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	fat_print_arch(t_infile *file, cpu_type_t cputype,
 	if (cputype == CPU_TYPE_I386)
 		ft_printf("\n%s (for architecture i386):\n", file->filename);
 	else if (cputype == CPU_TYPE_POWERPC)
-		ft_printf("\n%s (for architecture ):\n", file->filename);
+		ft_printf("\n%s (for architecture ppc):\n", file->filename);
 	else if (cputype == CPU_TYPE_X86_64)
 		ft_printf("\n%s (for architecture x86_64):\n", file->filename);
 	else if (cputype == CPU_TYPE_ARM64)
