@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:47 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 16:18:27 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 08:49:17 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	process_normal(t_infile *infile)
 		return (-1);
 	}
 	// here we print our text
+	print_file_type(infile, "");
+//	ft_printf("[*] text_sz = %lu text_offs = %lu\n", infile->text_sz, infile->text_offs);
 	print_text(infile);
 	return (0);
 }

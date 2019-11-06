@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:10:27 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 17:12:24 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 08:47:37 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	print_file_type(t_infile *file, char *type)
 {
 	if (file->type_printed == 0)
 	{
-		ft_printf("%s : %s\n", type, file->filename);
+		if (!ft_strcmp("Archive : ", type))
+			ft_printf("%s%s\n", type, file->filename);
+		else 
+			ft_printf("%s%s:\n", type, file->filename);
 		file->type_printed = 1;
 	}
 }
@@ -57,9 +60,9 @@ void	print_text_32(t_infile *file)
 	uint32_t		print;
 
 	i = 0;
-	current = (uint8_t *)file->save + file->text_offs;
+	current = (uint8_t *)file->start + file->text_offs;
 	ft_putstr("(__TEXT,__text) section\n");
-	while (file->text_sz > 0)
+	while (i < file->text_sz)
 	{
 		print = 16;
 		ft_printf("%08lx\t", file->text_addr);
@@ -83,7 +86,7 @@ void	print_text_64(t_infile *file)
 	uint32_t		print;
 
 	i = 0;
-	current = (uint8_t *)file->save + file->text_offs;
+	current = (uint8_t *)file->start + file->text_offs;
 	ft_putstr("(__TEXT,__text) section\n");
 	while (i < file->text_sz)
 	{

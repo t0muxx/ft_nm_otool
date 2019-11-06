@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 17:13:30 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 08:45:57 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		process_archive(t_infile *file)
 	if (protect(file, (void *)file->start + SARMAG + sizeof(struct ar_hdr)) < 0)
 		return (error_gen("corrupted archive header"));
 	ar_header = (void *)file->start + SARMAG;
+	print_file_type(file, "Archive : ");
 	parse_archive_member(file, ar_header);
-	print_file_type(file, "Archive");
 	return (0);
 }

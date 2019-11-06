@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:19:30 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 15:44:09 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 08:50:46 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int		print_archive_member(t_infile *file, struct ar_hdr *ar_header)
 	{
 		name = (char *)ar_header + sizeof(struct ar_hdr);
 		ret = ft_atoi((char *)ar_header->ar_name + ft_strlen(AR_EFMT1));
-		ft_printf("\n%s(%s):\n", file->filename, name);
+		ft_printf("%s(%s):\n", file->filename, name);
 	}
 	else
 	{
-		ft_printf("\n%s(", file->filename);
+		ft_printf("%s(", file->filename);
 		putstr_member_name(ar_header->ar_name, 16);
 		ft_putstr("):\n");
 	}
