@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/06 08:43:20 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/06 09:59:35 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef	struct	s_infile
 	void					*start;
 	void					*save;
 	void					*current;
+	cpu_type_t				cputype;
+	cpu_subtype_t			cpusubtype;
 	uint64_t				text_sz;
 	uint64_t				text_offs;
 	uint64_t				text_addr;
