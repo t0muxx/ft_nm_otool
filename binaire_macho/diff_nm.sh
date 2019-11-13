@@ -10,7 +10,7 @@ do
 	then
 		echo "err with nm"
 	else
-		diff -U 3 resnm resftnm
+		colordiff -u resnm resftnm
 		if [ $? -eq 1 ]
 		then
 			echo "[!] output from nm and ft_nm differ."
