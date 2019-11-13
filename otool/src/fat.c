@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:13:38 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/05 17:14:56 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/13 08:13:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	process_fat_32(t_infile *file)
 	void				*save_start;
 
 	save_start = file->start;
-//	ft_putstr("process_fat\n");
 	i = 0;
 	if (protect(file, (void *)file->start
 		+ sizeof(struct fat_header) + sizeof(struct fat_arch)) < 0)
