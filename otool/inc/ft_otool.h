@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/13 08:10:54 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/13 08:16:33 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef	struct		s_infile
 
 void				print_text(t_infile *file);
 void				print_file_type(t_infile *file, char *type);
+int					print_text_bytes(t_infile *file,
+										uint8_t *current, uint32_t print);
 int					protect(t_infile *file, void *ptr);
 int					error_gen(char *str);
 size_t				protected_strlen(char *str, t_infile *file);
