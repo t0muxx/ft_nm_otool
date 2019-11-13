@@ -6,12 +6,12 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/06 09:59:35 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/13 08:10:54 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_OTOOL__H
-# define FT_OTOOL__H
+#ifndef FT_OTOOL_H
+# define FT_OTOOL_H
 
 # include "libft.h"
 # include <sys/stat.h>
@@ -34,11 +34,7 @@
 # define IS_BE 3
 # define IS_BE_64 4
 
-//# define DEBUG_HEADER
-//# define DEBUG_SEGMENT
-//# define DEBUG_SECTION
-
-typedef	struct	s_infile
+typedef	struct		s_infile
 {
 	char					*filename;
 	uint8_t					type;
@@ -55,37 +51,39 @@ typedef	struct	s_infile
 	uint64_t				ar_sz;
 	void					*mac_header;
 
-}				t_infile;
+}					t_infile;
 
-void		print_text(t_infile *file);
-void		print_file_type(t_infile *file, char *type);
+void				print_text(t_infile *file);
+void				print_file_type(t_infile *file, char *type);
+int					protect(t_infile *file, void *ptr);
+int					error_gen(char *str);
+size_t				protected_strlen(char *str, t_infile *file);
+void				protected_free(t_infile *file);
 
-int			protect(t_infile *file, void *ptr);
-int			error_gen(char *str);
-size_t		protected_strlen(char *str, t_infile *file);
-void		protected_free(t_infile *file);
+int					process_archive(t_infile *file);
+int					process_fat(t_infile *file);
+int					process_macho(t_infile *infile);
+t_infile			*process_infile(char *path);
+int					process_header(t_infile *infile);
 
-int			process_archive(t_infile *file);
-int			process_fat(t_infile *file);
-int			process_macho(t_infile *infile);
-t_infile	*process_infile(char *path);
-int			process_header(t_infile *infile);
+int					iter_load_command(t_infile *infile);
 
-int			iter_load_command(t_infile *infile);
+int					parse_segment(t_infile *file, struct load_command *lc);
+int					parse_symtab(t_infile *file,
+									struct symtab_command *symtab_command);
+void				symbol_resolve(t_infile *infile);
 
-int			parse_segment(t_infile *file, struct load_command *lc);
-int			parse_symtab(t_infile *file, struct symtab_command *symtab_command);
-void		symbol_resolve(t_infile *infile);
+uint64_t			reverse_64(uint8_t should, uint64_t num);
+uint32_t			reverse_32(uint8_t should, uint32_t num);
+uint8_t				reverse_8(uint8_t should, uint8_t num);
 
-uint64_t	reverse_64(uint8_t should, uint64_t num);
-uint32_t	reverse_32(uint8_t should, uint32_t num);
-uint8_t		reverse_8(uint8_t should, uint8_t num);
+int					print_archive_member(t_infile *file,
+											struct ar_hdr *ar_header);
+int					get_str_offset_archive(struct ar_hdr *ar_header);
+void				putstr_member_name(char *str, size_t len);
 
-int			print_archive_member(t_infile *file, struct ar_hdr *ar_header);
-int			get_str_offset_archive(struct ar_hdr *ar_header);
-void		putstr_member_name(char *str, size_t len);
-
-int			search_cputype_x64(t_infile *file, unsigned long magic_bytes);
-void		fat_print_arch(t_infile *file, cpu_type_t cputype,
+int					search_cputype_x64(t_infile *file,
+													unsigned long magic_bytes);
+void				fat_print_arch(t_infile *file, cpu_type_t cputype,
 						cpu_subtype_t cpusubtype);
 #endif
