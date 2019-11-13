@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:46:29 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/06 11:40:21 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/13 08:12:08 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	process_header_full(t_infile *infile)
 		if (protect(infile, (void *)infile->start
 		+ sizeof(struct mach_header)) < 0)
 			return (error_gen("file size inferior to header size"));
-		infile->cputype = reverse_32(infile->type == IS_BE, ((struct mach_header *)infile->start)->cputype);
+		infile->cputype = reverse_32(infile->type == IS_BE,
+				((struct mach_header *)infile->start)->cputype);
 		infile->cpusubtype = ((struct mach_header *)infile->start)->cpusubtype;
 	}
 	if (infile->type == IS_64 || infile->type == IS_BE_64)
@@ -27,7 +28,8 @@ int	process_header_full(t_infile *infile)
 		if (protect(infile, (void *)infile->start
 		+ sizeof(struct mach_header_64)) < 0)
 			return (error_gen("file size inferior to header size"));
-		infile->cputype = reverse_32(infile->type == IS_BE_64, ((struct mach_header_64 *)infile->start)->cputype);
+		infile->cputype = reverse_32(infile->type == IS_BE_64,
+				((struct mach_header_64 *)infile->start)->cputype);
 		infile->cpusubtype = ((struct mach_header_64 *)
 				infile->start)->cpusubtype;
 	}
