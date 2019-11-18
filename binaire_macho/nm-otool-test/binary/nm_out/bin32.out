@@ -1,4 +1,0 @@
-         U _exit
-00000000 T _ft_strlen
-00000040 T _main
-         U _strdup

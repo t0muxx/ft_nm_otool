@@ -1,5 +1,0 @@
-nm-otool-test/object/ft_bzero64.o:
-Contents of (__TEXT,__text) section
-0000000000000000	c3 48 ff ce c6 04 37 00 48 83 fe 00 74 f2 eb f1 
-0000000000000010	48 83 ff 00 74 ea 48 83 fe 00 74 e4 e8 e0 ff ff 
-0000000000000020	ff c3 

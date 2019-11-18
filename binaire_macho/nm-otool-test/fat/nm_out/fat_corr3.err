@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/fat/fat_corr3 truncated or malformed fat file (offset: 12 for cputype (4096) cpusubtype (134752) not aligned on it's alignment (2^3))
-

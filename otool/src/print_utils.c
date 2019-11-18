@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 08:15:17 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/13 08:15:59 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/15 10:43:53 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		print_text_bytes(t_infile *file, uint8_t *current, uint32_t print)
 	byte = current;
 	while (i < 16 && print)
 	{
+		if (protect(file, byte) < 0)
+			return (-1);
 		nb = *byte / 16;
 		ft_putchar(base[nb]);
 		nb = *byte % 16;
@@ -45,7 +47,7 @@ int		print_text_bytes(t_infile *file, uint8_t *current, uint32_t print)
 		i++;
 		byte++;
 		print--;
-		if (protect(file, (void *)byte) < 0)
+		if (protect(file, byte) < 0)
 			return (-1);
 	}
 	return (0);

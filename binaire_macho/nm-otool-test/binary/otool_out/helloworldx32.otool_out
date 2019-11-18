@@ -1,7 +1,0 @@
-nm-otool-test/binary/helloworldx32:
-Contents of (__TEXT,__text) section
-00001f40	55 89 e5 83 ec 28 e8 00 00 00 00 58 b9 01 00 00 
-00001f50	00 8d 80 5f 00 00 00 ba 0c 00 00 00 c7 45 fc 00 
-00001f60	00 00 00 c7 04 24 01 00 00 00 89 44 24 04 c7 44 
-00001f70	24 08 0c 00 00 00 89 4d f8 89 55 f4 e8 0d 00 00 
-00001f80	00 31 c9 89 45 f0 89 c8 83 c4 28 5d c3 

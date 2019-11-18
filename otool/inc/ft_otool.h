@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:46:49 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/13 08:16:33 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:49:00 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ uint8_t				reverse_8(uint8_t should, uint8_t num);
 
 int					print_archive_member(t_infile *file,
 											struct ar_hdr *ar_header);
-int					get_str_offset_archive(struct ar_hdr *ar_header);
+int					get_str_offset_archive(t_infile *file,
+												struct ar_hdr *ar_header);
 void				putstr_member_name(char *str, size_t len);
 
 int					search_cputype_x64(t_infile *file,

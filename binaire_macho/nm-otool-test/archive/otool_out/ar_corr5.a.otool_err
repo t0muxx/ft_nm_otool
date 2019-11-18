@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/archive/ar_corr5.a': truncated or malformed archive (offset to next archive member past the end of the archive after member ft_toupper.o)

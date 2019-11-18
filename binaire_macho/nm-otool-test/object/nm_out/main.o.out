@@ -1,8 +1,0 @@
-         U _exit
-         U _ft_bzero
-         U _ft_putstr
-         U _ft_strcpy
-00000000 T _main
-         U _malloc
-         U _realloc
-00000004 C _str

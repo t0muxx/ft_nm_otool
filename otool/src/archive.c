@@ -6,7 +6,7 @@
 /*   By: tmaraval <tmaraval@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 17:41:54 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/13 08:11:34 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:47:06 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int		parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 	offset = 0;
 	magic_bytes = 0;
 	ar_header = file->start;
+	if (protect(file, (void *)ar_header + sizeof(struct ar_hdr)) < 0)
+		return (error_gen("malformed archive header"));
 	if (ft_strncmp(ar_header->ar_fmag, "`\n", 2))
 		return (error_gen("malformed archive header"));
-	offset = get_str_offset_archive(ar_header);
+	offset = get_str_offset_archive(file, ar_header);
 	file->start = (void *)file->start + sizeof(struct ar_hdr) + offset;
 	magic_bytes = *(uint32_t *)((void *)file->start);
 	if (!(!ft_strncmp((char *)file->start, ARMAG, SARMAG)
@@ -54,7 +56,7 @@ int		parse_archive_member_work(t_infile *file, struct ar_hdr *ar_header)
 			return (-1);
 	}
 	file->start = (void *)file->start + ft_atoi(ar_header->ar_size) - offset;
-	offset = get_str_offset_archive((struct ar_hdr *)((void *)file->start
+	offset = get_str_offset_archive(file, (struct ar_hdr *)((void *)file->start
 				+ sizeof(struct ar_hdr)));
 	return (0);
 }

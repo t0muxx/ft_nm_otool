@@ -6,7 +6,7 @@
 /*   By: tmaraval <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:19:30 by tmaraval          #+#    #+#             */
-/*   Updated: 2019/11/04 16:23:19 by tmaraval         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:38:16 by tmaraval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ void	putstr_member_name(char *str, size_t len)
 	}
 }
 
-int		get_str_offset_archive(struct ar_hdr *ar_header)
+int		get_str_offset_archive(t_infile *file, struct ar_hdr *ar_header)
 {
 	int	ret;
 
 	ret = 0;
+	if (file)
+		;
+	if (protect(file, ar_header->ar_name + ft_strlen(AR_EFMT1)) < 0)
+		return (0);
 	if (!ft_strncmp(ar_header->ar_name, AR_EFMT1, ft_strlen(AR_EFMT1)))
 	{
 		ret = ft_atoi((char *)ar_header->ar_name + ft_strlen(AR_EFMT1));
@@ -44,6 +48,8 @@ int		print_archive_member(t_infile *file, struct ar_hdr *ar_header)
 
 	ret = 0;
 	name = NULL;
+	if (protect(file, ar_header->ar_name + ft_strlen(AR_EFMT1)) < 0)
+		return (0);
 	if (!ft_strncmp(ar_header->ar_name, AR_EFMT1, ft_strlen(AR_EFMT1)))
 	{
 		name = (char *)ar_header + sizeof(struct ar_hdr);

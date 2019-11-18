@@ -1,4 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/archive/ar_corr4.a(ft_atoi.o) The end of the file was unexpectedly encountered
-
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm: nm-otool-test/archive/ar_corr4.a truncated or malformed archive (terminator characters in archive member "\376\007" not the correct "`\n" values for the archive member header for ol.o)
-

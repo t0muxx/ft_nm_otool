@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: 'nm-otool-test/binary/ls_string_table_corr5': truncated or malformed object (bad string table index: 10462 past the end of string table, for symbol at index 4)

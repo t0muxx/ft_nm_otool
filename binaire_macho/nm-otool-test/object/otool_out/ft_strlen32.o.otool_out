@@ -1,4 +1,0 @@
-nm-otool-test/object/ft_strlen32.o:
-Contents of (__TEXT,__text) section
-00000000	53 51 30 c0 b9 ff ff ff ff f2 ae 29 df 4f 59 89 
-00000010	df 5b c3 

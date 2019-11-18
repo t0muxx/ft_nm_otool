@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump: nm_sample/hell/libmlx_corupted.a(mlx_shaders.o): truncated or malformed object (bad string table index: 1835933754 past the end of string table, for symbol at index 38)
